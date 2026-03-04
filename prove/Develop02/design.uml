@@ -1,8 +1,8 @@
 @startuml
 
 class Program{
-    #ENTRY_PROMPTS: list
-    #JOURNAL_PROMPTS: list
+    #entryPrompts: list
+    #journalPrompts: list
     -GetJournal(in file): string
     -DisplayJournal(in entries: string): void
     -ModifyJournal(): string
