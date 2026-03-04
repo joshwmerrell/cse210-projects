@@ -1,4 +1,16 @@
 @startuml
-Alice -> Bob: Hello!
-Josh -> James: Goodbye.
+
+class Journal{
+    +entries: string
+    +entry: string
+    +getEntries(): string
+    +addEntry(): string
+    +writeEntries(): void
+}
+
+class PromptGenerator{
+    -prompts: list
+    +generatePrompt(): string
+}
+
 @enduml
