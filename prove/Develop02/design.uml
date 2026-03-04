@@ -1,16 +1,27 @@
 @startuml
 
+class Program{
+    #ENTRY_PROMPTS: list
+    #JOURNAL_PROMPTS: list
+    -GetJournal(in file): string
+    -DisplayJournal(in entries: string): void
+    -ModifyJournal(): string
+    -WriteJournal(in entries: string): void
+}
+
 class Journal{
     +entries: string
     +entry: string
-    +getEntries(): string
-    +addEntry(): string
-    +writeEntries(): void
+    +AddEntry(): string
 }
 
-class PromptGenerator{
-    -prompts: list
-    +generatePrompt(): string
+class Prompt{
+    +prompts: list
+    +DisplayPrompts(): string
+    +DisplayRandomPrompt(): string
 }
+
+Prompt -> Program
+Journal -> Program
 
 @enduml
