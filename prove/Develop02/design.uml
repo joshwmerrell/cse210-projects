@@ -1,24 +1,25 @@
 @startuml
 
 class Program{
-    #entryPrompts: list
-    #journalPrompts: list
-    -GetJournal(in file): string
-    -DisplayJournal(in entries: string): void
-    -ModifyJournal(): string
-    -WriteJournal(in entries: string): void
+    #_entryPrompts: list
+    #_journalPrompts: list
+    -_filename: string
+    -OpenJournal(): string
+    -DisplayJournal(): void
+    -ModifyJournal(): void
+    -WriteJournal(): void
 }
 
 class Journal{
-    +entries: string
-    +entry: string
-    +AddEntry(): string
+    +_entries: string
+    +_entry: string
+    +AddEntry(prompt: string): void
 }
 
 class Prompt{
-    +prompts: list
-    +DisplayPrompts(): string
-    +DisplayRandomPrompt(): string
+    +_prompts: list
+    +DisplayPrompts(): void
+    +GetRandomPrompt(): string
 }
 
 Prompt -> Program
