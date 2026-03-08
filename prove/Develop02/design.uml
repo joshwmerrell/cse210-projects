@@ -2,9 +2,10 @@
 
 class Program
 {
+    -_filename: string=""
     -_journal: string
-    -_journalPrompt: string
-    -OpenJournal(): void
+    -_journalPrompts: List<string>=new List<string>{"Read Journal", "Add Entry", "Write to Journal"}
+    -OpenJournal(): string
     -DisplayJournal(): void
     -ModifyJournal(): void
     -WriteJournal(): void
@@ -20,7 +21,7 @@ class Journal
 
 class Entry
 {
-    +_timeAndDate: string
+    +_dateAndTime: string=DateTime.Now.ToShortTimeString() + " - " + DateTime.Now.ToLongDateString()
     +_entryPrompt: string
     +_entry: string
     +GetEntry(): string
@@ -30,7 +31,7 @@ class Prompt
 {
     +_prompts: List<string>
     +ListAllPrompts(): void
-    +GenerateRandomPrompt(): string
+    +GetRandomPrompt(): string
 }
 
 Program <|.. Journal

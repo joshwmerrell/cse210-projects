@@ -2,7 +2,7 @@ public class Prompt
 {
     public List<string> _prompts;
 
-    public void DisplayPrompts()
+    public void ListAllPrompts()
     {
         int i = 1;
         foreach (string prompt in _prompts)
@@ -11,7 +11,6 @@ public class Prompt
             i++;
         }
     }
-
     public string GetRandomPrompt()
     {
         int index = new Random().Next(_prompts.Count);
