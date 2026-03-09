@@ -1,0 +1,27 @@
+@startuml design
+
+class Program
+{
+    GetRandomInt() : int
+}
+
+class Fraction
+{
+    -_top : int
+    -_bottom : int
+    +Fraction()
+    +Fraction(wholeNumber : int)
+    +Fraction(top : int, bottom : int)
+
+    +GetTop() : int
+    +SetTop(top : int)
+    +GetBottom() : int
+    +SetBottom(bottom : int)
+
+    +GetFractionString() : string
+    +GetDecimalValue() : double
+}
+
+Program <|.. Fraction
+
+@enduml
