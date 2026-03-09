@@ -1,0 +1,23 @@
+@startuml design
+
+class Program
+{
+    _scriptures : List<Type> = new List<Type>
+    StoreScripture() : void
+    ClearConsole() : void
+    DisplayScripture() : void
+    HideWords() : void
+    QuitProgram() : void
+    ' QuitProgramOrGetMoreDifficult() : void
+}
+
+class Scripture
+{
+    -_title : string
+    -_words : List<string>
+    +MakeWordBlank() : void
+}
+
+Program <|.. Scripture
+
+@enduml
