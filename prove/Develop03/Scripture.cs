@@ -26,10 +26,46 @@ public class Scripture
         return $"{_reference}\n\n{words}";
     }
 
-    public string BlankOutWords()
+    public void BlankOutWords()
     {
-        //
-        return "";
-        //
+        int i = 0;
+        int amountOfWordsToBlank = GetRandomInt(3, 1);
+        if (AmountOfVisibleWords() == 0)
+        {
+            amountOfWordsToBlank = 0;
+        }
+        else if (amountOfWordsToBlank >= AmountOfVisibleWords())
+        {
+            amountOfWordsToBlank = 1;
+        }
+        while (i != amountOfWordsToBlank)
+        {
+            // THERE IS AN ISSUE HERE \/
+            _words[GetRandomInt(AmountOfWords())].MakeBlank();
+        }
+    }
+
+    public int AmountOfVisibleWords()
+    {
+        int i = 0;
+        foreach (Word word in _words)
+        {
+            if (word.IsVisible())
+            {
+                i++;
+            }
+        }
+        return i;
+    }
+
+    private int AmountOfWords()
+    {
+        return _words.Count();
+    }
+
+    private int GetRandomInt(int maxInt, int minInt = 0)
+    {
+        Random random = new Random();
+        return random.Next(minInt, maxInt + 1);
     }
 }

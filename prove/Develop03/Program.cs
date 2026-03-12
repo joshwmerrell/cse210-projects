@@ -14,7 +14,7 @@ class Program
 
         void DisplayScripture()
         {
-            Console.WriteLine($"{scripture.GetScripture()}\n");
+            Console.WriteLine($"\n{scripture.GetScripture()}\n\n");
         }
 
         void QuitOrContinueProgram()
@@ -32,18 +32,18 @@ class Program
             Console.Clear();
         }
 
-        // void RemoveWords()
-        // {
-            
-        // }
+        void RemoveWords()
+        {
+            scripture.BlankOutWords();
+        }
 
         int i = 0;
         while (memorizeScripture)
         {
-            // if (i != 0)
-            // {
-            //     RemoveWords();
-            // }
+            if (i != 0)
+            {
+                RemoveWords();
+            }
             DisplayScripture();
             QuitOrContinueProgram();
             ClearConsole();
