@@ -7,11 +7,7 @@ class Program
     {
         bool memorizeScripture = true;
         Scripture scripture = new Scripture();
-        // void StoreScripture()
-        // {
-            
-        // }
-
+        
         void DisplayScripture()
         {
             Console.WriteLine($"\n{scripture.GetScripture()}\n\n");
@@ -19,11 +15,14 @@ class Program
 
         void QuitOrContinueProgram()
         {
-            Console.Write("Press enter to continue or type 'quit' to finish: ");
-            string quitOrContinue = Console.ReadLine();
-            if (quitOrContinue == "quit")
+            if (memorizeScripture)
             {
-                memorizeScripture = false;
+                Console.Write("Press enter to continue or type 'quit' to finish: ");
+                string quitOrContinue = Console.ReadLine();
+                if (quitOrContinue == "quit")
+                {
+                    memorizeScripture = false;
+                }
             }
         }
 
@@ -34,7 +33,14 @@ class Program
 
         void RemoveWords()
         {
-            scripture.BlankOutWords();
+            if (scripture.AmountOfVisibleWords() == 0)
+            {
+                memorizeScripture = false;
+            }
+            else
+            {
+                scripture.BlankOutWords();
+            }
         }
 
         int i = 0;

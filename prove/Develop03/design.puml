@@ -2,7 +2,6 @@
 
 class Program
 {
-    ' StoreScripture() : void
     DisplayScripture() : void
     QuitOrContinueProgram() : void
     ClearConsole() : void
@@ -12,13 +11,23 @@ class Program
 class Scripture
 {
     -_reference : string
-    -_words : List<Type>=new List<Type>
+    -_words : List<Word>=new List<Word>
     +Scripture(in reference : string, in scripture : string)
     +GetScripture() : string
     +BlankOutWords() : void
+    +AmountOfVisibleWords() : int
     -AmountOfWords() : int
-    -AmountOfVisibleWords() : int
-    -MakeWordBlank() : void
+    -GetRandomInt(in maxInt : int, in minInt : int) : int
+}
+
+class Word
+{
+    -_word : string
+    -_isBlank : bool
+    +Word(in word : string)
+    +GetWord() : string
+    +MakeBlank() : void
+    +IsVisible() : bool
 }
 
 class Reference
@@ -28,15 +37,6 @@ class Reference
     -_book : string
     +Reference(in reference : string)
     +GetReference() : string
-}
-
-class Word
-{
-    -_word : string
-    -_isBlank : bool
-    +Word(in word : string, in notBlank : bool)
-    +GetWord() : string
-    -IsLetter(in letter : string) : bool
 }
 
 Program <|.. Scripture

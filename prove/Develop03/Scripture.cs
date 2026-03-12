@@ -12,7 +12,7 @@ public class Scripture
         string[] wordsSplit = words.Split();
         foreach (string word in wordsSplit)
         {
-            _words.Add(new Word(word, true));
+            _words.Add(new Word(word));
         }
     }
 
@@ -30,18 +30,18 @@ public class Scripture
     {
         int i = 0;
         int amountOfWordsToBlank = GetRandomInt(3, 1);
-        if (AmountOfVisibleWords() == 0)
-        {
-            amountOfWordsToBlank = 0;
-        }
-        else if (amountOfWordsToBlank >= AmountOfVisibleWords())
+        if (amountOfWordsToBlank >= AmountOfVisibleWords())
         {
             amountOfWordsToBlank = 1;
         }
         while (i != amountOfWordsToBlank)
         {
-            // THERE IS AN ISSUE HERE \/
-            _words[GetRandomInt(AmountOfWords())].MakeBlank();
+            Word word = _words[GetRandomInt(AmountOfWords() - 1)];
+            if (word.IsVisible())
+            {
+                word.MakeBlank();
+                i++;
+            }
         }
     }
 
@@ -60,7 +60,7 @@ public class Scripture
 
     private int AmountOfWords()
     {
-        return _words.Count();
+        return _words.Count;
     }
 
     private int GetRandomInt(int maxInt, int minInt = 0)
