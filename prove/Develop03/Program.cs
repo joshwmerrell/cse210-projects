@@ -1,36 +1,53 @@
 using System;
+using System.Runtime.InteropServices;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Console.WriteLine("Hello Develop03 World!");
-
-        List<Type> _scriptures = new List<Type>{};
-
-        void StoreScripture()
-        {
+        bool memorizeScripture = true;
+        Scripture scripture = new Scripture();
+        // void StoreScripture()
+        // {
             
+        // }
+
+        void DisplayScripture()
+        {
+            Console.WriteLine($"{scripture.GetScripture()}\n");
+        }
+
+        void QuitOrContinueProgram()
+        {
+            Console.Write("Press enter to continue or type 'quit' to finish: ");
+            string quitOrContinue = Console.ReadLine();
+            if (quitOrContinue == "quit")
+            {
+                memorizeScripture = false;
+            }
         }
 
         void ClearConsole()
         {
-            
+            Console.Clear();
         }
 
-        void DisplayScripture()
-        {
+        // void RemoveWords()
+        // {
             
-        }
+        // }
 
-        void HideWords()
+        int i = 0;
+        while (memorizeScripture)
         {
-            
+            // if (i != 0)
+            // {
+            //     RemoveWords();
+            // }
+            DisplayScripture();
+            QuitOrContinueProgram();
+            ClearConsole();
+            i++;
         }
-
-        void QuitProgram()
-        {
-            
-        }
-    }
+    }   
 }

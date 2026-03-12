@@ -2,22 +2,45 @@
 
 class Program
 {
-    _scriptures : List<Type> = new List<Type>
-    StoreScripture() : void
-    ClearConsole() : void
+    ' StoreScripture() : void
     DisplayScripture() : void
-    HideWords() : void
-    QuitProgram() : void
-    ' QuitProgramOrGetMoreDifficult() : void
+    QuitOrContinueProgram() : void
+    ClearConsole() : void
+    RemoveWords() : void
 }
 
 class Scripture
 {
-    -_title : string
-    -_words : List<string>
-    +MakeWordBlank() : void
+    -_reference : string
+    -_words : List<Type>=new List<Type>
+    +Scripture(in reference : string, in scripture : string)
+    +GetScripture() : string
+    +BlankOutWords() : void
+    -AmountOfWords() : int
+    -AmountOfVisibleWords() : int
+    -MakeWordBlank() : void
+}
+
+class Reference
+{
+    -_versesNumbers : string
+    -_chapterNumber : string
+    -_book : string
+    +Reference(in reference : string)
+    +GetReference() : string
+}
+
+class Word
+{
+    -_word : string
+    -_isBlank : bool
+    +Word(in word : string, in notBlank : bool)
+    +GetWord() : string
+    -IsLetter(in letter : string) : bool
 }
 
 Program <|.. Scripture
+Scripture <|.. Reference
+Scripture <|.. Word
 
 @enduml
