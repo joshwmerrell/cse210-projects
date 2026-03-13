@@ -2,16 +2,21 @@
 
 class Program
 {
-    DisplayScripture() : void
-    QuitOrContinueProgram() : void
+    _scriptures : List<Scripture>
+    _memorizingScripture : bool
+    _nextScripture : bool
+    SetScripturesList() : void
     ClearConsole() : void
+    DisplayScripture() : void
+    QuitNextOrContinueProgram() : void
+    NextScripture() : void
     RemoveWords() : void
 }
 
 class Scripture
 {
-    -_reference : string
-    -_words : List<Word>=new List<Word>
+    -_reference : Reference
+    -_words : List<Word>
     +Scripture(in reference : string, in scripture : string)
     +GetScripture() : string
     +BlankOutWords() : void
@@ -32,9 +37,9 @@ class Word
 
 class Reference
 {
-    -_versesNumbers : string
-    -_chapterNumber : string
     -_book : string
+    -_chapter : string
+    -_verses : string
     +Reference(in reference : string)
     +GetReference() : string
 }
