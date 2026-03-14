@@ -4,18 +4,18 @@ using System.Text.RegularExpressions;
 public class Word
 {
     private string _word;
-    private bool _isBlank;
+    private bool _isHidden;
 
     public Word(string word)
     {
         _word = word;
-        _isBlank = false;
+        _isHidden = false;
     }
 
     public string GetWord()
     {
         string word = _word;
-        if (_isBlank)
+        if (_isHidden)
         {
             char[] characters = word.ToCharArray();
             word = "";
@@ -34,15 +34,15 @@ public class Word
         return word;
     }
 
-    public void MakeBlank()
+    public void MakeHidden()
     {
-        _isBlank = true;
+        _isHidden = true;
     }
 
     public bool IsVisible()
     {
         bool isVisible = true;
-        if (_isBlank)
+        if (_isHidden)
         {
             isVisible = false;
         }

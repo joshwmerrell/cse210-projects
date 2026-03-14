@@ -4,13 +4,14 @@ class Program
 {
     _scriptures : List<Scripture>
     _memorizingScripture : bool
-    _nextScripture : bool
     SetScripturesList() : void
     ClearConsole() : void
     DisplayScripture() : void
-    QuitNextOrContinueProgram() : void
-    NextScripture() : void
+    Options() : void
     RemoveWords() : void
+    ResetScripture() : void
+    NextScripture() : void
+    CurrentScriptureIndex() : int
 }
 
 class Scripture
@@ -19,19 +20,19 @@ class Scripture
     -_words : List<Word>
     +Scripture(in reference : string, in scripture : string)
     +GetScripture() : string
-    +BlankOutWords() : void
-    +AmountOfVisibleWords() : int
-    -AmountOfWords() : int
+    +HideWords() : void
+    +ScriptureIsHidden() : bool
+    -AmountOfVisibleWords() : int
     -GetRandomInt(in maxInt : int, in minInt : int) : int
 }
 
 class Word
 {
     -_word : string
-    -_isBlank : bool
+    -_isHidden : bool
     +Word(in word : string)
     +GetWord() : string
-    +MakeBlank() : void
+    +MakeHidden() : void
     +IsVisible() : bool
 }
 

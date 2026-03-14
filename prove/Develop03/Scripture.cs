@@ -23,26 +23,40 @@ public class Scripture
         return $"{_reference.GetReference()}\n\n{words}";
     }
 
-    public void BlankOutWords()
+    public void HideWords()
     {
         int i = 0;
-        int amountOfWordsToBlank = GetRandomInt(5, 1);
-        if (amountOfWordsToBlank >= AmountOfVisibleWords())
+        int amountOfWordsToHide = GetRandomInt(5, 1);
+        if (AmountOfVisibleWords() == 0)
         {
-            amountOfWordsToBlank = 1;
+            amountOfWordsToHide = 0;
         }
-        while (i != amountOfWordsToBlank)
+        else if (amountOfWordsToHide >= AmountOfVisibleWords())
         {
-            Word word = _words[GetRandomInt(AmountOfWords() - 1)];
+            amountOfWordsToHide = 1;
+        }
+        while (i != amountOfWordsToHide)
+        {
+            Word word = _words[GetRandomInt(_words.Count - 1)];
             if (word.IsVisible())
             {
-                word.MakeBlank();
+                word.MakeHidden();
                 i++;
             }
         }
     }
 
-    public int AmountOfVisibleWords()
+    public bool ScriptureIsHidden()
+    {
+        bool isScriptureHidden = false;
+        if (AmountOfVisibleWords() == 0)
+        {
+            isScriptureHidden = true;
+        }
+        return isScriptureHidden;
+    }
+
+    private int AmountOfVisibleWords()
     {
         int i = 0;
         foreach (Word word in _words)
@@ -53,11 +67,6 @@ public class Scripture
             }
         }
         return i;
-    }
-
-    private int AmountOfWords()
-    {
-        return _words.Count;
     }
 
     private int GetRandomInt(int maxInt, int minInt = 0)
