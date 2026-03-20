@@ -1,0 +1,89 @@
+@startuml design
+
+class Program
+{
+    
+}
+
+class Prompt
+{
+    -_prompts : List<string>
+    +Prompt(in prompts : List<string>)
+    +DisplayPrompt(in index : int) : void
+    +DisplayRandomPrompt() : void
+    +ListAllPrompts() : void
+}
+
+class Activity
+{
+    -_name : string
+    -_startingMessage : string
+    -_completionMessage : string
+    -_completionMessageDuration : int
+    ~Activity(name : string, startingMessage : string, completionMessage : string)
+    ~Start() : void
+    ~End() : void
+    ~SetCompletionMessageDuration(seconds : int) : void
+    ~GetCompletionMessageDuration() : int
+}
+
+class BreathingActivity
+{
+    -_activityDuration : int
+    +BreathingActivity(name : string, startingMessage : string, completionMessage : string)
+    -Main() : void
+    -AskForDuration() : void
+    -PauseToGetReady() : void
+    -Breathe() : void
+    -BreatheIn() : void
+    -BreathOut() : void
+}
+
+' class ReflectionActivity
+' {
+'     ' _reflections
+'     +ReflectionActivity(name : string, startingMessage : string, completionMessage : string)
+' }
+
+' class ListingActivity
+' {
+'     +ListingActivity(name : string, startingMessage : string, completionMessage : string)
+' }
+
+class Timer
+{
+    -_seconds : int
+    -_message : string
+    ~Timer(seconds : int, message : string)
+    ~GetSeconds() : int
+    ~GetMessage() : string
+}
+
+class CountdownTimer
+{
+    +CountdownTimer(seconds : int, message : string)
+}
+
+class AnimatedTimer
+{
+    -_animationSteps : List<string>
+    +Animatedimer(seconds : int, message : string, animationStepsCombinedWithCommas : string)
+    -SetAnimationSteps(stepsCombinedWithCommas : string) : void
+    -RunTimer() : void
+}
+
+' class Animation
+' {
+'     -_step1 : string
+'     -_step2 : string
+'     -_step3 : string
+'     -_step4 : string
+'     +Animation(step1 : string, step2 : string, step3 : string, step4 : string)
+' }
+
+' BreathingActivity --|> Activity
+' ReflectionActivity --|> Activity
+' ListingActivity --|> Activity
+
+
+@enduml

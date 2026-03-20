@@ -1,0 +1,52 @@
+@startuml design
+
+class Program
+{
+    _scriptures : List<Scripture>
+    _memorizingScripture : bool
+    SetScripturesList() : void
+    ClearConsole() : void
+    DisplayScripture() : void
+    Options() : void
+    RemoveWords() : void
+    ResetScripture() : void
+    NextScripture() : void
+    CurrentScriptureIndex() : int
+}
+
+class Scripture
+{
+    -_reference : Reference
+    -_words : List<Word>
+    +Scripture(in reference : string, in scripture : string)
+    +GetScripture() : string
+    +HideWords() : void
+    +ScriptureIsHidden() : bool
+    -AmountOfVisibleWords() : int
+    -GetRandomInt(in maxInt : int, in minInt : int) : int
+}
+
+class Word
+{
+    -_word : string
+    -_isHidden : bool
+    +Word(in word : string)
+    +GetWord() : string
+    +MakeHidden() : void
+    +IsVisible() : bool
+}
+
+class Reference
+{
+    -_book : string
+    -_chapter : string
+    -_verses : string
+    +Reference(in reference : string)
+    +GetReference() : string
+}
+
+Program <|.. Scripture
+Scripture <|.. Reference
+Scripture <|.. Word
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+
+class Program
+{
+    -_filename: string=""
+    -_journal: string
+    -_journalPrompts: List<string>=new List<string>{"Read Journal", "Add Entry", "Write to Journal"}
+    -OpenJournal(): string
+    -DisplayJournal(): void
+    -ModifyJournal(): void
+    -WriteJournal(): void
+}
+
+class Journal
+{
+    +_entries: string
+    +_entry: string
+    +DisplayEntries(): void
+    +AddEntry(): void
+}
+
+class Entry
+{
+    +_dateAndTime: string=DateTime.Now.ToShortTimeString() + " - " + DateTime.Now.ToLongDateString()
+    +_entryPrompt: string
+    +_entry: string
+    +GetEntry(): string
+}
+
+class Prompt
+{
+    +_prompts: List<string>
+    +ListAllPrompts(): void
+    +GetRandomPrompt(): string
+}
+
+Program <|.. Journal
+Journal *-- Entry
+Program <|.. Prompt
+Entry <|.. Prompt
+
+
+@enduml
