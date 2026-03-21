@@ -24,7 +24,7 @@ public class AnimatedTimer : Timer
         while (i != GetSeconds())
         {
             int index = 0;
-            while (i != _animationSteps.Count)
+            while (index != _animationSteps.Count)
             {
                 Console.Clear();
                 Console.WriteLine(GetMessage() + _animationSteps[index]);
