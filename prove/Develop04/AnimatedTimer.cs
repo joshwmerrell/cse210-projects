@@ -1,7 +1,7 @@
 public class AnimatedTimer : Timer
 {
     private List<string> _animationSteps = new List<string>{};
-    public AnimatedTimer(int seconds = 5, string message = "", string animationStepsCombinedWithCommas = "|,/,-,\\") : base(seconds, message)
+    public AnimatedTimer(int seconds = 5, string message = "", string animationStepsCombinedWithCommas = " |, /, -, \\") : base(seconds, message)
     {
         SetAnimationSteps(animationStepsCombinedWithCommas);
         RunTimer();

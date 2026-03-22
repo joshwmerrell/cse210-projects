@@ -17,38 +17,55 @@ class Prompt
 class Activity
 {
     -_name : string
-    -_startingMessage : string
+    -_description : string
     -_completionMessage : string
-    -_completionMessageDuration : int
-    ~Activity(name : string, startingMessage : string, completionMessage : string)
+    ~Activity(name : string, description : string, completionMessage : string)
+    ~GetStartingMessage() : string
     ~Start() : void
     ~End() : void
-    ~SetCompletionMessageDuration(seconds : int) : void
-    ~GetCompletionMessageDuration() : int
 }
 
 class BreathingActivity
 {
     -_activityDuration : int
+    -_breatheInDuration : int
+    -_breatheOutDuration : int
     +BreathingActivity(name : string, startingMessage : string, completionMessage : string)
     -Main() : void
-    -AskForDuration() : void
+    -GetActivityDuration() : void
     -PauseToGetReady() : void
     -Breathe() : void
     -BreatheIn() : void
     -BreathOut() : void
 }
 
-' class ReflectionActivity
-' {
-'     ' _reflections
-'     +ReflectionActivity(name : string, startingMessage : string, completionMessage : string)
-' }
+class ReflectionActivity
+{
+    -_activityDuration : int
+    -_reflectionPrompts : List<string>
+    -_reflectionQuestions : List<string>
+    +ReflectionActivity(name : string, description : string, completionMessage : string, reflectivePromptsSeparatedByCommas : string, reflectiveQuestionsSeparatedByCommas : string)
+    -SetReflectivePromptsList(promptsSeparatedByCommas : string) : void
+    -SetReflectiveQuestionsList(questionsSeparatedByCommas : string) : void
+    -Main() : void
+    -GetActivityDuration() : void
+    -PauseToGetReady() : void
+    -GiveThoughtfulPrompt() : void
+    -GiveReflectiveQuestions(numberOfQuestions : int) : void
+}
 
-' class ListingActivity
-' {
-'     +ListingActivity(name : string, startingMessage : string, completionMessage : string)
-' }
+class ListingActivity
+{
+    -_responceAmount : int
+    -_questions : List<string>
+    +ListingActivity(name : string, startingMessage : string, completionMessage : string, questionsSeparatedByCommas : string)
+    -SetQuestionsList(questionsSeparatedByCommas : string) : void
+    -Main() : void
+    -GetResponceAmount() : void
+    -PauseToGetReady() : void
+    -GiveQuestion() : void
+    -GetResponces() : void
+}
 
 class Timer
 {
@@ -72,18 +89,22 @@ class AnimatedTimer
     -RunTimer() : void
 }
 
-' class Animation
-' {
-'     -_step1 : string
-'     -_step2 : string
-'     -_step3 : string
-'     -_step4 : string
-'     +Animation(step1 : string, step2 : string, step3 : string, step4 : string)
-' }
-
-' BreathingActivity --|> Activity
-' ReflectionActivity --|> Activity
-' ListingActivity --|> Activity
+BreathingActivity <|-- Activity
+ReflectionActivity <|-- Activity
+ListingActivity <|-- Activity
+Activity <-- AnimatedTimer
+BreathingActivity <-- CountdownTimer
+BreathingActivity <-- AnimatedTimer
+ReflectionActivity <-- CountdownTimer
+ReflectionActivity <-- AnimatedTimer
+ListingActivity <-- CountdownTimer
+ListingActivity <-- AnimatedTimer
+CountdownTimer <|-- Timer
+AnimatedTimer <|-- Timer
+Program <-- Prompt
+Program <-- BreathingActivity
+Program <-- ReflectionActivity
+Program <-- ListingActivity
 
 
 @enduml

@@ -17,7 +17,7 @@ public class Prompt
 
     public void DisplayRandomPrompt()
     {
-        Console.WriteLine(_prompts[new Random().Next(0, _prompts.Count + 1)]);
+        Console.WriteLine(_prompts[new Random().Next(0, _prompts.Count)]);
     }
 
     public void ListAllPrompts()

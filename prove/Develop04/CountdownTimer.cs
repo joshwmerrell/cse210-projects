@@ -6,7 +6,7 @@ public class CountdownTimer : Timer
         while (i != 0)
         {
             Console.Clear();
-            Console.WriteLine(GetMessage() + $"{i}");
+            Console.WriteLine(GetMessage() + $" {i}");
             Thread.Sleep(1000);
             i--;
         }

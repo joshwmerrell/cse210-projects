@@ -4,7 +4,7 @@ public class BreathingActivity : Activity
     private int _breatheInDuration = 3;
     private int _breatheOutDuration = 4;
 
-    public BreathingActivity(string name = "Breathing Activity", string startingMessage = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing", string completionMessage = "Congradulations! You have completed the Activity....") : base(name, startingMessage, completionMessage)
+    public BreathingActivity(string name = "Breathing Activity", string description = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing", string completionMessage = "Congradulations, you have completed the Activity!") : base(name, description, completionMessage)
     {
         Start();
         Main();
@@ -13,13 +13,13 @@ public class BreathingActivity : Activity
 
     private void Main()
     {
-        AskForDuration();
+        GetActivityDuration();
         Console.Clear();
         PauseToGetReady();
         Breathe();
     }
 
-    private void AskForDuration()
+    private void GetActivityDuration()
     {
         while (_activityDuration < (_breatheInDuration + _breatheOutDuration))
         {

@@ -1,23 +1,25 @@
 public class Activity
 {
     private string _name;
-    private string _startingMessage;
+    private string _description;
     private string _completionMessage;
 
-    protected Activity(string name, string startingMessage, string completionMessage)
+    protected Activity(string name, string description, string completionMessage)
     {
         _name = name;
-        _startingMessage = startingMessage;
+        _description = description;
         _completionMessage = completionMessage;
+    }
+
+    protected string GetStartingMessage()
+    {
+        return $"Welcome to the {_name}.\n\n{_description}\n";
     }
 
     protected void Start()
     {
         Console.Clear();
-        Console.WriteLine("Welcome to the " + _name + ".");
-        Console.WriteLine();
-        Console.WriteLine(_startingMessage);
-        Console.WriteLine();
+        Console.WriteLine(GetStartingMessage());
     }
 
     protected void End()
