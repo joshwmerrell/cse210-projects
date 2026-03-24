@@ -16,4 +16,9 @@ public class Shape
     {
         return 0;
     }
+
+    public virtual string GetColor()
+    {
+        return _color;
+    }
 }

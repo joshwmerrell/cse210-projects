@@ -1,7 +1,7 @@
 public class Rectangle : Shape
 {
-    private double _length;
-    private double _width;
+    private double _length = 1;
+    private double _width = 1;
 
     public Rectangle(double length = 1, double width = 1, string color = "red") : base(color)
     {
@@ -13,6 +13,11 @@ public class Rectangle : Shape
     {
         SetLength(length);
         SetWidth(width);
+    }
+
+    public Rectangle() : base("red")
+    {
+        
     }
 
     private void SetLength(double length)

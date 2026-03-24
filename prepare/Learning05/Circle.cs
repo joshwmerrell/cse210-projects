@@ -1,6 +1,6 @@
 public class Circle : Shape
 {
-    private double _radius;
+    private double _radius = 1;
 
     public Circle(double radius = 1, string color = "blue") : base(color)
     {
@@ -10,6 +10,11 @@ public class Circle : Shape
     public Circle(string color = "blue", double radius = 1) : base(color)
     {
         SetRadius(radius);
+    }
+
+    public Circle() : base("blue")
+    {
+        
     }
 
     private void SetRadius(double radius)

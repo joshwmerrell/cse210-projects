@@ -1,6 +1,6 @@
 public class Square : Shape
 {
-    private double _side;
+    private double _side = 1;
 
     public Square(double side = 1, string color = "yellow") : base(color)
     {
@@ -10,6 +10,11 @@ public class Square : Shape
     public Square(string color = "yellow", double side = 1) : base(color)
     {
         SetSide(side);
+    }
+
+    public Square() : base("yellow")
+    {
+        
     }
 
     private void SetSide(double side)
