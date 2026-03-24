@@ -49,6 +49,7 @@ class Program
             Console.WriteLine($"Shape {i}:");
             Console.WriteLine($"     Color: {shape.GetColor()}");
             Console.WriteLine($"      Area: {shape.GetArea()}");
+            i++;
         }
     }
 }
