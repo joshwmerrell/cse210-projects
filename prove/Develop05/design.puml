@@ -1,8 +1,8 @@
-@startuml
+@startuml design
 
 class Program
 {
-    
+
 }
 
 @enduml
