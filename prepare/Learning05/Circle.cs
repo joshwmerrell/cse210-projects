@@ -16,4 +16,14 @@ public class Circle : Shape
     {
         _radius = radius;
     }
+
+    public override double GetArea()
+    {
+        return Math.PI * Math.Pow(GetRadius(), 2);
+    }
+
+    private double GetRadius()
+    {
+        return _radius;
+    }
 }

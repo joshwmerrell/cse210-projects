@@ -24,4 +24,19 @@ public class Rectangle : Shape
     {
         _width = width;
     }
+
+    public override double GetArea()
+    {
+        return GetLength() * GetWidth();
+    }
+
+    private double GetLength()
+    {
+        return _length;
+    }
+
+    private double GetWidth()
+    {
+        return _width;
+    }
 }

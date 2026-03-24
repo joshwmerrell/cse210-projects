@@ -16,4 +16,14 @@ public class Square : Shape
     {
         _side = side;
     }
+
+    public override double GetArea()
+    {
+        return Math.Pow(GetSide(), 2);
+    }
+
+    private double GetSide()
+    {
+        return _side;
+    }
 }
