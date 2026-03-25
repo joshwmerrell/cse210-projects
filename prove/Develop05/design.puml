@@ -2,7 +2,78 @@
 
 class Program
 {
-
+    -_points : Points
+    -_goals : Goals
 }
+
+class Points
+{
+    -_amount : int
+    +Points()
+    +DisplayPoints() : void
+    +AddPoints() : void
+}
+
+class Goals
+{
+    -_goals : List<Goal>
+    +Goals()
+    +CreateGoal() : void
+    +ListGoals() : void
+    +LoadGoals() : void
+    +RecordEvent(in goalNumber : int) : int
+    -GoalIsFinished(in goalIndex : int) : bool
+    -MarkGoalCompleted(in goalIndex : int) : void
+    -GetPoints(in goalIndex : int) : int
+}
+
+class File
+{
+    -_fileName : string
+    -_goalsInFile : List<string>
+    +File(in fileName : string)
+    -GetFile() : string
+    -FileFound() : bool
+    -SetGoals() : void
+    +GetGoals() : List<Goal>
+    +WriteToFile(in goals : List<Goal>) : void
+}
+
+abstract Goal
+{
+    -_name : string
+    -_description : string
+    -_points : int
+    -_isCompleted : bool
+    +Goal(in name : string, in description : string, in points : int)
+    +GetGoal() : string
+    +GetPoints() : int
+    +IsFinished() : bool
+}
+
+class SimpleGoal
+{
+    +SimpleGoal(in name : string, in description : string, in points : int)
+}
+
+class ChecklistGoal
+{
+    -_amountToComplete : int
+    -_amountAccomplished : int
+    +ChecklistGoal(in name : string, in description : string, in points : int, in amountToComplete : int)
+}
+
+class EternalGoal
+{
+    +EternalGoal(in name : string, in description : string, in points : int)
+}
+
+Program <-- Points
+Program <-- Goals
+Goals <-- Goal
+Goals <-- File
+Goal <|-- SimpleGoal
+Goal <|-- ChecklistGoal
+Goal <|-- EternalGoal
 
 @enduml
