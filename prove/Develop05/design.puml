@@ -60,12 +60,16 @@ class ChecklistGoal
 {
     -_amountToComplete : int
     -_amountAccomplished : int
-    +ChecklistGoal(in name : string, in description : string, in points : int, in amountToComplete : int)
+    -_bonusPoints : int
+    +ChecklistGoal(in name : string, in description : string, in points : int, in amountToComplete : int, in bonusPoints : int)
+    +override GetPoints() : int
+    -GetBonusPoints() : int
 }
 
 class EternalGoal
 {
     +EternalGoal(in name : string, in description : string, in points : int)
+    +override IsFinished() : bool
 }
 
 Program <-- Points
