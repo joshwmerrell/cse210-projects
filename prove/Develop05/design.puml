@@ -2,22 +2,35 @@
 
 class Program
 {
+    -_continueProgram : bool
     -_points : Points
     -_goals : Goals
+    -_menuOptions : List<string>
+    ClearConsole() : void
+    DisplayPoints() : void
+    ListMenu() : void
+    ChooseOption() : void
+    CreateNewGoal() : void
+    ListGoals() : void
+    SaveGoals() : void
+    LoadGoals() : void
+    RecordEvent() : void
+    Quit() : void
 }
 
 class Points
 {
     -_amount : int
     +Points()
-    +DisplayPoints() : void
     +AddPoints() : void
+    +GetPoints() : int
 }
 
 class Goals
 {
     -_goals : List<Goal>
     +Goals()
+    +SetGoal() : void
     +CreateGoal() : void
     +ListGoals() : void
     +LoadGoals() : void
