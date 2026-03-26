@@ -30,12 +30,12 @@ class Goals
 {
     -_goals : List<Goal>
     +Goals()
-    +SetGoal() : void
     +CreateGoal() : void
     +ListGoals() : void
     +LoadGoals() : void
+    -SetGoal() : void
     +RecordEvent(in goalNumber : int) : int
-    -GoalIsFinished(in goalIndex : int) : bool
+    -GoalIsCompleted(in goalIndex : int) : bool
     -MarkGoalCompleted(in goalIndex : int) : void
     -GetPoints(in goalIndex : int) : int
 }
@@ -58,10 +58,19 @@ abstract Goal
     -_description : string
     -_points : int
     -_isCompleted : bool
-    +Goal(in name : string, in description : string, in points : int)
-    +GetGoal() : string
+    +Goal(in name : string, in description : string, in points : int, in isComplete : bool)
+    -SetName(in name : string) : void
+    -SetDescription(in description : string) : void
+    -SetPoints(in points : int) : void
+    -SetIsCompleted(in isCompleted : bool) : void
+    +GetGoal() virtual : string
+    -GetCompletionBox() : string
+    -IsCompleted() : bool
+    -GetName() : string
+    -GetDescription() : string
+    +MarkAsCommplete() virtual : void
     +GetPoints() : int
-    +IsFinished() : bool
+    +GetGoalSimplified() abstract : string
 }
 
 class SimpleGoal

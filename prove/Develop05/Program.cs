@@ -7,7 +7,7 @@ class Program
     {
         bool _continueProgram = true;
         Points _points = new Points();
-        // Goals _goals = new Goals();
+        Goals _goals = new Goals();
         List<string> _menuOptions = new List<string>{};
         List<string> _goalTypes = new List<string>{};
 
@@ -75,12 +75,12 @@ class Program
 
         void CreateNewGoal()
         {
-            
+            _goals.CreateGoal();
         }
 
         void ListGoals()
         {
-            
+            _goals.ListGoals();
         }
 
         void SaveGoals()
@@ -95,7 +95,7 @@ class Program
 
         void RecordEvent()
         {
-            
+            _goals.RecordEvent();
         }
 
         void Quit()
