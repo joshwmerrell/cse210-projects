@@ -68,6 +68,7 @@ abstract Goal
     -IsCompleted() : bool
     -GetName() : string
     -GetDescription() : string
+    -GetCompleted() : string
     +MarkAsCommplete() virtual : void
     +GetPoints() : int
     +GetGoalSimplified() abstract : string
@@ -75,7 +76,10 @@ abstract Goal
 
 class SimpleGoal
 {
-    +SimpleGoal(in name : string, in description : string, in points : int)
+    -_goalType : string
+    +SimpleGoal(in name : string, in description : string, in points : int, in isComplete : bool)
+    +GetGoalSimplified() override : string
+    -GetGoalType() : string
 }
 
 class ChecklistGoal

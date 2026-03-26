@@ -174,6 +174,7 @@ class Program
         //     return int.Parse(Console.ReadLine());
         // }
 
+        ClearConsole();
         while (_continueProgram)
         {
             DisplayPoints();

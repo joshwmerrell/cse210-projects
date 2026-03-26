@@ -38,7 +38,7 @@ abstract public class Goal
         return $"{GetCompletionBox()} {GetName()} ({GetDescription()})";
     }
 
-    private string GetCompletionBox()
+    protected string GetCompletionBox()
     {
         string completionBox = "[ ]";
         if (IsComplete())
@@ -53,14 +53,24 @@ abstract public class Goal
         return _isComplete;
     }
 
-    private string GetName()
+    protected string GetName()
     {
         return _name;
     }
 
-    private string GetDescription()
+    protected string GetDescription()
     {
         return _description;
+    }
+
+    protected string GetCompleted()
+    {
+        string completed = "False";
+        if (IsComplete())
+        {
+            completed = "True";
+        }
+        return completed;
     }
 
     virtual public void MarkAsComplete()
