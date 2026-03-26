@@ -52,15 +52,15 @@ class Program
             }
             else if (option == "3")
             {
-                SaveGoals();
+                // SaveGoals();
             }
             else if (option == "4")
             {
-                LoadGoals();
+                // LoadGoals();
             }
             else if (option == "5")
             {
-                RecordEvent();
+                // RecordEvent();
             }
             else if (option == "6")
             {
@@ -80,7 +80,7 @@ class Program
 
         void SaveGoals()
         {
-            
+            _goals.SaveGoals();
         }
 
         void LoadGoals()

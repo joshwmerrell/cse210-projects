@@ -31,6 +31,7 @@ public class Goals
             else if (choice == "3")
             {
                 incorrectChoice = false;
+                _goals.Add(new ChecklistGoal(GetNewName(), GetNewDescription(), GetNewChecklistAmount(), GetNewBonusAmount(), GetNewChecklistIterationAmount()));
             } 
         }
         Console.WriteLine();
@@ -65,6 +66,24 @@ public class Goals
         return int.Parse(Console.ReadLine());
     }
 
+    private int GetNewChecklistAmount()
+    {
+        Console.Write("How many points is each accomplishment of your goal worth? ");
+        return int.Parse(Console.ReadLine());
+    }
+
+    private int GetNewBonusAmount()
+    {
+        Console.Write("How many bonus points do you want when you complete this goal? ");
+        return int.Parse(Console.ReadLine());
+    }
+
+    private int GetNewChecklistIterationAmount()
+    {
+        Console.Write("");
+        return int.Parse(Console.ReadLine());
+    }
+
     public void ListGoals()
     {
         if (_goals.Count == 0)
@@ -85,9 +104,20 @@ public class Goals
         Console.WriteLine();
     }
 
-    public void LoadGoals()
+    public void SaveGoals()
     {
         
+    }
+
+    public void LoadGoals()
+    {
+        GetFileName();
+    }
+
+    private string GetFileName()
+    {
+        Console.Write("What is the file name? ");
+        return Console.ReadLine();
     }
 
     private void SetGoal()
