@@ -2,12 +2,12 @@ public class SimpleGoal : Goal
 {
     private string _goalType = "SimpleGoal";
 
-    public SimpleGoal(string name, string description, int points, bool isComplete) : base(name, description, points, isComplete)
+    public SimpleGoal(string name, string description, int points, bool isComplete = false) : base(name, description, points, isComplete)
     {
         
     }
 
-    public override string GetGoalSimplified()
+    public override string GetSimplified()
     {
         return $"{GetGoalType()}~`{GetName()}~`{GetDescription()}~`{GetPoints()}~`{GetCompleted()}";
     }

@@ -9,7 +9,6 @@ class Program
         Points _points = new Points();
         Goals _goals = new Goals();
         List<string> _menuOptions = new List<string>{};
-        List<string> _goalTypes = new List<string>{};
 
         _menuOptions.Add("Create New Goal");
         _menuOptions.Add("List Goals");
@@ -17,10 +16,6 @@ class Program
         _menuOptions.Add("Load Goals");
         _menuOptions.Add("Record Event");
         _menuOptions.Add("Quit");
-
-        _goalTypes.Add("Simple Goal");
-        _goalTypes.Add("Eternal Goal");
-        _goalTypes.Add("Checklist Goal");
 
         void ClearConsole()
         {
@@ -174,13 +169,12 @@ class Program
         //     return int.Parse(Console.ReadLine());
         // }
 
-        ClearConsole();
         while (_continueProgram)
         {
             DisplayPoints();
             ListMenu();
             ChooseOption();
-            ClearConsole();
         }
+        ClearConsole();
     }
 }

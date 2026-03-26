@@ -29,8 +29,13 @@ class Points
 class Goals
 {
     -_goals : List<Goal>
+    -_goalTypes : List<string>
     +Goals()
     +CreateGoal() : void
+    -ListGoalTypes() : void
+    -GetNewName() : string
+    -GetNewDescription() : string
+    -GetNewAmount() : int
     +ListGoals() : void
     +LoadGoals() : void
     -SetGoal() : void
@@ -63,22 +68,31 @@ abstract Goal
     -SetDescription(in description : string) : void
     -SetPoints(in points : int) : void
     -SetIsCompleted(in isCompleted : bool) : void
-    +GetGoal() virtual : string
+    +Display() virtual : string
     -GetCompletionBox() : string
     -IsCompleted() : bool
     -GetName() : string
     -GetDescription() : string
     -GetCompleted() : string
-    +MarkAsCommplete() virtual : void
+    +MarkAsComplete() virtual : void
     +GetPoints() : int
-    +GetGoalSimplified() abstract : string
+    +GetSimplified() abstract : string
 }
 
 class SimpleGoal
 {
     -_goalType : string
     +SimpleGoal(in name : string, in description : string, in points : int, in isComplete : bool)
-    +GetGoalSimplified() override : string
+    +GetSimplified() override : string
+    -GetGoalType() : string
+}
+
+class EternalGoal
+{
+    -_goalType : string
+    +EternalGoal(in name : string, in description : string, in points : int)
+    +MarkAsComplete() override : void
+    +GetSimplified() override : string
     -GetGoalType() : string
 }
 
@@ -90,12 +104,6 @@ class ChecklistGoal
     +ChecklistGoal(in name : string, in description : string, in points : int, in amountToComplete : int, in bonusPoints : int)
     +override GetPoints() : int
     -GetBonusPoints() : int
-}
-
-class EternalGoal
-{
-    +EternalGoal(in name : string, in description : string, in points : int)
-    +override IsFinished() : bool
 }
 
 Program <-- Points

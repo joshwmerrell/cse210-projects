@@ -33,9 +33,9 @@ abstract public class Goal
         _isComplete = isComplete;
     }
 
-    virtual public string GetGoal()
+    virtual public void Display()
     {
-        return $"{GetCompletionBox()} {GetName()} ({GetDescription()})";
+        Console.WriteLine($"{GetCompletionBox()} {GetName()} ({GetDescription()})");
     }
 
     protected string GetCompletionBox()
@@ -83,5 +83,5 @@ abstract public class Goal
         return _points;
     }
 
-    abstract public string GetGoalSimplified();
+    abstract public string GetSimplified();
 }
