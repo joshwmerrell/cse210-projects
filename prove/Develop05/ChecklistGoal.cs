@@ -2,13 +2,13 @@ public class ChecklistGoal : Goal
 {
     private string _goalType = "ChecklistGoal";
     private int _iterationAmountToComplete;
-    private int _iterationsCompleted;
+    private int _iterationsAccomplished;
     private int _bonusPoints;
 
-    public ChecklistGoal(string name, string description, int points, int bonusPoints, int iterationAmountToComplete, int iterationsCompleted = 0, bool isComplete = false) : base(name, description, points, isComplete)
+    public ChecklistGoal(string name, string description, int points, int bonusPoints, int iterationAmountToComplete, int iterationsAccomplished = 0, bool isComplete = false) : base(name, description, points, isComplete)
     {
         SetIterationAmountToComplete(iterationAmountToComplete);
-        SetIterationsCompleted(iterationsCompleted);
+        SetIterationsAccomplished(iterationsAccomplished);
         SetBonusPoints(bonusPoints);
     }
 
@@ -17,9 +17,9 @@ public class ChecklistGoal : Goal
         _iterationAmountToComplete = amount;
     }
 
-    private void SetIterationsCompleted(int amount)
+    private void SetIterationsAccomplished(int amount)
     {
-        _iterationsCompleted = amount;
+        _iterationsAccomplished = amount;
     }
 
     private void SetBonusPoints(int amount)
@@ -29,7 +29,7 @@ public class ChecklistGoal : Goal
     
     public override void Display()
     {
-        Console.WriteLine($"{GetCompletionBox()} {GetName()} ({GetDescription()}) -- Accomplished {GetIterationsCompleted()}/{GetIterationAmountToComplete()}");
+        Console.WriteLine($"{GetCompletionBox()} {GetName()} ({GetDescription()}) -- Accomplished {GetIterationsAccomplished()}/{GetIterationAmountToComplete()}");
     }
 
     public override int MarkAsComplete()
@@ -37,19 +37,19 @@ public class ChecklistGoal : Goal
         if (isLastIteration())
         {
             SetIsComplete(true);
-            SetIterationsCompleted(GetIterationsCompleted() + 1);
+            SetIterationsAccomplished(GetIterationsAccomplished() + 1);
             return GetPoints() + GetBonusPoints();
         }
         else
         {
-            SetIterationsCompleted(GetIterationsCompleted() + 1);
+            SetIterationsAccomplished(GetIterationsAccomplished() + 1);
             return GetPoints();
         }
     }
 
     private bool isLastIteration()
     {
-        if (GetIterationsCompleted() == GetIterationAmountToComplete() - 1)
+        if (GetIterationsAccomplished() == GetIterationAmountToComplete() - 1)
         {
             return true;
         }
@@ -61,7 +61,7 @@ public class ChecklistGoal : Goal
 
     public override string GetForFile()
     {
-        return $"{GetGoalType()}~`{GetName()}~`{GetDescription()}~`{GetPoints()}~`{GetBonusPoints()}~`{GetIterationAmountToComplete()}~`{GetIterationsCompleted()}";
+        return $"{GetGoalType()}~`{GetName()}~`{GetDescription()}~`{GetPoints()}~`{GetBonusPoints()}~`{GetIterationAmountToComplete()}~`{GetIterationsAccomplished()}";
     }
 
     private string GetGoalType()
@@ -76,7 +76,7 @@ public class ChecklistGoal : Goal
         {
             completionBox = "[X]";
         }
-        else if (GetIterationsCompleted() != 0)
+        else if (GetIterationsAccomplished() != 0)
         {
             completionBox = "[-]"; 
         }
@@ -88,9 +88,9 @@ public class ChecklistGoal : Goal
         return _iterationAmountToComplete;
     }
 
-    private int GetIterationsCompleted()
+    private int GetIterationsAccomplished()
     {
-        return _iterationsCompleted;
+        return _iterationsAccomplished;
     }
 
     private int GetBonusPoints()

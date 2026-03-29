@@ -1,0 +1,142 @@
+@startuml design
+
+class Program
+{
+    _continueProgram : bool
+    _points : Points
+    _goals : Goals
+    _menuOptions : List<string>
+    DisplayPoints() : void
+    ListMenu() : void
+    ChooseOption() : void
+    CreateNewGoal() : void
+    ListGoals() : void
+    LoadPointsAndGoals() : void
+    RecordEvent() : void
+    SaveGoalsAndQuit() : void
+    Quit() : void
+}
+
+class Points
+{
+    -_amount : int
+    +Points()
+    +Add() : void
+    +Get() : int
+}
+
+class Goals
+{
+    -_file : File
+    -_goals : List<Goal>
+    -_goalTypes : List<string>
+    +Goals()
+    +CreateGoal() : void
+    -ListGoalTypes() : void
+    -GetNewName() : string
+    -GetNewDescription() : string
+    -GetNewAmount() : int
+    -GetNewChecklistAmount() : int
+    -GetNewBonusAmount() : int
+    -GetNewChecklistIterationAmount() : int
+    +ListGoals(nameOnly : bool) : void
+    +SaveToFile(totalPoints : int) : void
+    +NewFile() : void
+    +GetTotalPointsFromFile() : int
+    +DownloadGoals() : void
+    -GetFileName() : string
+    +RecordEvent() : int
+    -ThereAreNoGoals() : bool
+    -MarkGoalCompleted() : int
+    -GoalIsCompleted(goalIndex : int) : bool
+}
+
+class File
+{
+    -_totalPointsInFile : int
+    -_goalsInFile : List<string>
+    +File()
+    +New(fileName : string) : void
+    -SetPoints(amount : int) : void
+    -SetGoals(goalsInFile : List<string>) : void
+    -GetFirstFileLine(fileName : string) : string
+    -GetFileLines(fileName : string, howManyLinesToSkip : int) : List<string>
+    +Points() : int
+    +Goals() : List<Goal>
+    +UpdatePoints(points : int) : void
+    +UpdateGoals(updatedGoalsList : List<Goal>) : void
+    -AddNewGoal(newGoal : string) : void
+    -GetPoints() : int
+    -GetGoals() : List<string>
+}
+
+class Goal
+{
+    -_name : string
+    -_description : string
+    -_points : int
+    -_isCompleted : bool
+    +Goal(name : string, description : string, points : int, isComplete : bool)
+    -SetName(name : string) : void
+    -SetDescription(description : string) : void
+    -SetPoints(points : int) : void
+    -SetIsComplete(isComplete : bool) : void
+    +Display() : void
+    +DisplayNameOnly() : void
+    -GetCompletionBox() : string
+    -GetName() : string
+    -GetDescription() : string
+    -GetCompleted() : string
+    +IsComplete() : bool
+    +MarkAsComplete() : void
+    +GetPoints() : int
+    +GetSimplified() : string
+}
+
+class SimpleGoal
+{
+    -_goalType : string
+    +SimpleGoal(name : string, description : string, points : int, isComplete : bool)
+    +GetForFile() : string
+    -GetGoalType() : string
+}
+
+class EternalGoal
+{
+    -_goalType : string
+    +EternalGoal(name : string, description : string, points : int)
+    +MarkAsComplete() : int
+    +GetForFile() : string
+    -GetGoalType() : string
+}
+
+class ChecklistGoal
+{
+    -_goalType : string
+    -_iterationAmountToComplete : int
+    -_iterationsAccomplished : int
+    -_bonusPoints : int
+    +ChecklistGoal(name : string, description : string, points : int, bonusPoints : int, iterationAmountToComplete : int, iterationsAccomplished : int, isComplete : bool)
+    -SetIterationAmountToComplete(amount : int) : void
+    -SetIterationsAccomplished(amount : int) : void
+    -SetBonusPoints(amount : int) : void
+    +Display() : void
+    +MarkAsComplete() : int
+    -isLastIteration() : bool
+    +GetForFile() : string
+    -GetGoalType() : string
+    -GetCompletionBox() : string
+    -GetIterationAmountToComplete() : int
+    -GetIterationsAccomplished() : int
+    -GetBonusPoints() : int
+}
+
+Program <-- Points
+Program <-- Goals
+Goals <-- Goal
+Goals <-- File
+Goal <|-- SimpleGoal
+Goal <|-- ChecklistGoal
+Goal <|-- EternalGoal
+
+@enduml

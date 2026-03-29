@@ -17,11 +17,6 @@ class Program
         _menuOptions.Add("Save Goals and Quit");
         _menuOptions.Add("Quit without Saving");
 
-        // void ClearConsole()
-        // {
-        //     Console.Clear();
-        // }
-
         void DisplayPoints()
         {
             Console.WriteLine($"Your Points: {_points.Get()}");

@@ -5,7 +5,6 @@ public class File
 
     public File()
     {
-        
     }
 
     public void New(string fileName)
