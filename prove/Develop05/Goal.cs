@@ -38,6 +38,11 @@ abstract public class Goal
         Console.WriteLine($"{GetCompletionBox()} {GetName()} ({GetDescription()})");
     }
 
+    public void DisplayNameOnly()
+    {
+        Console.WriteLine(GetName());
+    }
+
     protected string GetCompletionBox()
     {
         string completionBox = "[ ]";
@@ -48,7 +53,7 @@ abstract public class Goal
         return completionBox;
     }
 
-    private bool IsComplete()
+    public bool IsComplete()
     {
         return _isComplete;
     }
@@ -63,19 +68,20 @@ abstract public class Goal
         return _description;
     }
 
-    protected string GetCompleted()
-    {
-        string completed = "False";
-        if (IsComplete())
-        {
-            completed = "True";
-        }
-        return completed;
-    }
+    // protected string GetCompleted()
+    // {
+    //     string completed = "False";
+    //     if (IsComplete())
+    //     {
+    //         completed = "True";
+    //     }
+    //     return completed;
+    // }
 
-    virtual public void MarkAsComplete()
+    virtual public int MarkAsComplete()
     {
         _isComplete = true;
+        return _points;
     }
 
     public int GetPoints()
@@ -83,5 +89,5 @@ abstract public class Goal
         return _points;
     }
 
-    abstract public string GetSimplified();
+    abstract public string GetForFile();
 }

@@ -27,7 +27,7 @@ public class ChecklistGoal : Goal
         _bonusPoints = amount;
     }
 
-    public override string GetSimplified()
+    public override string GetForFile()
     {
         return $"{GetGoalType()}~`{GetName()}~`{GetDescription()}~`{GetPoints()}~`{GetBonusPoints()}~`{GetIterationAmountToComplete()}~`{GetIterationsCompleted()}";
     }

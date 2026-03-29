@@ -1,5 +1,8 @@
+using System.Reflection.Metadata.Ecma335;
+
 public class Goals
 {
+    private File _file;
     private List<Goal> _goals = new List<Goal>{};
     private List<string> _goalTypes = new List<string>{};
 
@@ -84,15 +87,26 @@ public class Goals
         return int.Parse(Console.ReadLine());
     }
 
-    public void ListGoals()
+    public void ListGoals(bool nameOnly = false)
     {
-        if (_goals.Count == 0)
+        if (ThereAreNoGoals())
         {
             Console.WriteLine("You have no goals.");
         }
+        else if (nameOnly)
+        {
+            Console.WriteLine("Your goals are:");
+            int i = 1;
+            foreach (Goal goal in _goals)
+            {
+                Console.Write($"{i}. ");
+                goal.DisplayNameOnly();
+                i++;
+            } 
+        }
         else
         {
-            Console.WriteLine("The goals are:");
+            Console.WriteLine("Your goals are:");
             int i = 1;
             foreach (Goal goal in _goals)
             {
@@ -104,14 +118,30 @@ public class Goals
         Console.WriteLine();
     }
 
-    public void SaveGoals()
+    public void SaveToFile(int totalPoints)
     {
-        
+        _file.UpdatePoints(totalPoints);
+        _file.UpdateGoals(_goals);
+        _file.WriteToFile(GetFileName());
     }
 
-    public void LoadGoals()
+    public void NewFile()
     {
-        GetFileName();
+        _file = new File(GetFileName());
+    }
+
+    public int GetTotalPointsFromFile()
+    {
+        return _file.Points();
+    }
+
+    public void DownloadGoals()
+    {
+        List<Goal> existingGoals = _file.Goals();
+        foreach (Goal existingGoal in existingGoals)
+        {
+            _goals.Insert(0, existingGoal);
+        }
     }
 
     private string GetFileName()
@@ -119,29 +149,58 @@ public class Goals
         Console.Write("What is the file name? ");
         return Console.ReadLine();
     }
-
-    private void SetGoal()
+    
+    public int RecordEvent()
     {
-        
+        if (ThereAreNoGoals())
+        {
+            Console.WriteLine("I'm sorry, but you need to create a goal to accomplish first.");
+            return 0;
+        }
+        else
+        {
+            bool nameOnly = true;
+            ListGoals(nameOnly);
+            return MarkGoalCompleted();
+        }
     }
 
-    public void RecordEvent()
+    private bool ThereAreNoGoals()
     {
-        
+        if (_goals.Count == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private int MarkGoalCompleted()
+    {
+        Console.Write("Which goal did you accomplish? ");
+        int goalIndex = int.Parse(Console.ReadLine()) - 1;
+        if (GoalIsCompleted(goalIndex))
+        {
+            Console.Write("That goal is already completed.");
+            return 0;
+        }
+        else
+        {
+            return _goals[goalIndex].MarkAsComplete();
+        }
     }
 
     private bool GoalIsCompleted(int goalIndex)
     {
-        return false;
-    }
-
-    private void MarkGoalCompleted(int goalIndex)
-    {
-        
-    }
-
-    private int GetPoints(int goalIndex)
-    {
-        return 0;
+        if (_goals[goalIndex].IsComplete())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

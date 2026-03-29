@@ -11,9 +11,9 @@ public class EternalGoal : Goal
     {
     }
 
-    public override string GetSimplified()
+    public override string GetForFile()
     {
-        return $"{GetGoalType()}~`{GetName()}~`{GetDescription()}~`{GetPoints()}~`{GetCompleted()}";
+        return $"{GetGoalType()}~`{GetName()}~`{GetDescription()}~`{GetPoints()}";
     }
 
     private string GetGoalType()

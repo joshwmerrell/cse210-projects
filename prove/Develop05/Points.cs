@@ -9,12 +9,12 @@ public class Points
         
     }
 
-    public void AddPoints(int points)
+    public void Add(int points)
     {
         _amount += points;
     }
 
-    public int GetPoints()
+    public int Get()
     {
         return _amount;
     }

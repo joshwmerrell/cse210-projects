@@ -12,10 +12,10 @@ class Program
 
         _menuOptions.Add("Create New Goal");
         _menuOptions.Add("List Goals");
-        _menuOptions.Add("Save Goals");
-        _menuOptions.Add("Load Goals");
         _menuOptions.Add("Record Event");
-        _menuOptions.Add("Quit");
+        _menuOptions.Add("Load Goals");
+        _menuOptions.Add("Save Goals and Quit");
+        _menuOptions.Add("Quit without Saving");
 
         void ClearConsole()
         {
@@ -24,7 +24,7 @@ class Program
 
         void DisplayPoints()
         {
-            Console.WriteLine($"Your Points: {_points.GetPoints()}");
+            Console.WriteLine($"Your Points: {_points.Get()}");
         }
 
         void ListMenu()
@@ -52,15 +52,15 @@ class Program
             }
             else if (option == "3")
             {
-                // SaveGoals();
+                RecordEvent();
             }
             else if (option == "4")
             {
-                // LoadGoals();
+                LoadPointsAndGoals();
             }
             else if (option == "5")
             {
-                // RecordEvent();
+                SaveGoalsAndQuit();
             }
             else if (option == "6")
             {
@@ -78,19 +78,23 @@ class Program
             _goals.ListGoals();
         }
 
-        void SaveGoals()
+        void LoadPointsAndGoals()
         {
-            _goals.SaveGoals();
-        }
-
-        void LoadGoals()
-        {
-            
+            _goals.NewFile();
+            _points.Add(_goals.GetTotalPointsFromFile());
+            _goals.DownloadGoals();
+            Console.WriteLine("The existing goals have been downloaded!");
         }
 
         void RecordEvent()
         {
-            _goals.RecordEvent();
+            _points.Add(_goals.RecordEvent());
+        }
+
+        void SaveGoalsAndQuit()
+        {
+            _goals.SaveToFile(_points.Get());
+            Quit();
         }
 
         void Quit()
@@ -98,76 +102,6 @@ class Program
             _continueProgram = false;
         }
 
-        // THIS WILL BE GIVEN TO THE CONSTRUCTOR FOR GOALS AND OTHERS!
-
-        // string GetGoalType()
-        // {
-        //     ListGoalTypes();
-        //     bool incorrectChoice = true;
-        //     string type = "";
-        //     while (incorrectChoice)
-        //     {
-        //         Console.Write("Which type of goal would you like to create? ");
-        //         string choice = Console.ReadLine();
-        //         if (choice == "1")
-        //         {
-        //             incorrectChoice = false;
-        //             type = "simple";
-        //         }
-        //         else if (choice == "2")
-        //         {
-        //             incorrectChoice = false;
-        //             type = "eternal";
-        //         }
-        //         else if (choice == "3")
-        //         {
-        //             incorrectChoice = false;
-        //             type = "checklist";
-        //         } 
-        //     }
-        //     return type;
-        // }
-
-        // void ListGoalTypes()
-        // {
-        //     Console.WriteLine("The types of Goals are:");
-        //     int i = 1;
-        //     foreach (string goalType in _goalTypes)
-        //     {
-        //         Console.WriteLine($"  {i}. {goalType}");
-        //         i++;
-        //     }
-        // }
-
-        // string GetGoalName()
-        // {
-        //     Console.WriteLine("What is the name of your goal? ");
-        //     return Console.ReadLine();
-        // }
-
-        // string GetGoalDescription()
-        // {
-        //     Console.WriteLine("What is a short description of it? ");
-        //     return Console.ReadLine();
-        // }
-
-        // int GetGoalAmount()
-        // {
-        //     Console.WriteLine("What is the amount of points associated with this goal?");
-        //     return int.Parse(Console.ReadLine());
-        // }
-
-        // int GetChecklistGoalAmount()
-        // {
-        //     Console.WriteLine("What is the amount of points associated with each accomplishment of this goal? ");
-        //     return int.Parse(Console.ReadLine());
-        // }
-
-        // int GetChecklistGoalBonusAmount()
-        // {
-        //     Console.WriteLine("What bonus amount do you want for completing this goal? ");
-        //     return int.Parse(Console.ReadLine());
-        // }
 
         while (_continueProgram)
         {
