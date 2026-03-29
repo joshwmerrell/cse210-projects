@@ -3,7 +3,12 @@ public class File
     private int _totalPointsInFile;
     private List<string> _goalsInFile;
 
-    public File(string fileName)
+    public File()
+    {
+        
+    }
+
+    public void New(string fileName)
     {
         SetPoints(int.Parse(GetFirstFileLine(fileName)));
         SetGoals(GetFileLines(fileName, 1));
@@ -30,7 +35,7 @@ public class File
         string[] lines = System.IO.File.ReadAllLines(fileName);
         List<string> fileLines = new List<string>{};
         int i = 1;
-        foreach (string line in fileLines)
+        foreach (string line in lines)
         {
             if (i > howManyLinesToSkip)
             {
@@ -57,7 +62,7 @@ public class File
             string goalDescription = parts[2];
             int goalPoints = int.Parse(parts[3]);
             bool goalCompleted = false;
-            if (parts[4] == "True")
+            if (parts.Length > 4 && parts[4] == "True")
             {
                 goalCompleted = true;
             }
@@ -108,18 +113,10 @@ public class File
     {
         using (StreamWriter outputFile = new StreamWriter(fileName))
         {
-            int i = 0;
+            outputFile.WriteLine(GetPoints());
             foreach (string line in GetGoals())
             {
-                if (i == 0)
-                {
-                    outputFile.WriteLine(GetPoints());
-                }
-                else
-                {
-                    outputFile.WriteLine(line);
-                }
-                i++;
+                outputFile.WriteLine(line);
             }
         }
     }

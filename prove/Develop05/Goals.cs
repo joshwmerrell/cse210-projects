@@ -2,7 +2,7 @@ using System.Reflection.Metadata.Ecma335;
 
 public class Goals
 {
-    private File _file;
+    private File _file = new File();
     private List<Goal> _goals = new List<Goal>{};
     private List<string> _goalTypes = new List<string>{};
 
@@ -37,7 +37,6 @@ public class Goals
                 _goals.Add(new ChecklistGoal(GetNewName(), GetNewDescription(), GetNewChecklistAmount(), GetNewBonusAmount(), GetNewChecklistIterationAmount()));
             } 
         }
-        Console.WriteLine();
     }
 
     private void ListGoalTypes()
@@ -83,7 +82,7 @@ public class Goals
 
     private int GetNewChecklistIterationAmount()
     {
-        Console.Write("");
+        Console.Write("How may times do you want to want to accomplish this goal before it is complete? ");
         return int.Parse(Console.ReadLine());
     }
 
@@ -115,7 +114,6 @@ public class Goals
                 i++;
             }  
         }
-        Console.WriteLine();
     }
 
     public void SaveToFile(int totalPoints)
@@ -127,7 +125,7 @@ public class Goals
 
     public void NewFile()
     {
-        _file = new File(GetFileName());
+        _file.New(GetFileName());
     }
 
     public int GetTotalPointsFromFile()
@@ -140,7 +138,7 @@ public class Goals
         List<Goal> existingGoals = _file.Goals();
         foreach (Goal existingGoal in existingGoals)
         {
-            _goals.Insert(0, existingGoal);
+            _goals.Add(existingGoal);
         }
     }
 
@@ -183,7 +181,7 @@ public class Goals
         int goalIndex = int.Parse(Console.ReadLine()) - 1;
         if (GoalIsCompleted(goalIndex))
         {
-            Console.Write("That goal is already completed.");
+            Console.WriteLine("That goal is already completed.");
             return 0;
         }
         else

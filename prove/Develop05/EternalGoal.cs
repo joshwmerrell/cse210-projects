@@ -7,8 +7,9 @@ public class EternalGoal : Goal
         
     }
 
-    public override void MarkAsComplete()
+    public override int MarkAsComplete()
     {
+        return GetPoints();
     }
 
     public override string GetForFile()

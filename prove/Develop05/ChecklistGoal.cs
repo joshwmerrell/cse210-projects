@@ -26,6 +26,38 @@ public class ChecklistGoal : Goal
     {
         _bonusPoints = amount;
     }
+    
+    public override void Display()
+    {
+        Console.WriteLine($"{GetCompletionBox()} {GetName()} ({GetDescription()}) -- Accomplished {GetIterationsCompleted()}/{GetIterationAmountToComplete()}");
+    }
+
+    public override int MarkAsComplete()
+    {
+        if (isLastIteration())
+        {
+            SetIsComplete(true);
+            SetIterationsCompleted(GetIterationsCompleted() + 1);
+            return GetPoints() + GetBonusPoints();
+        }
+        else
+        {
+            SetIterationsCompleted(GetIterationsCompleted() + 1);
+            return GetPoints();
+        }
+    }
+
+    private bool isLastIteration()
+    {
+        if (GetIterationsCompleted() == GetIterationAmountToComplete() - 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public override string GetForFile()
     {
@@ -35,6 +67,20 @@ public class ChecklistGoal : Goal
     private string GetGoalType()
     {
         return _goalType;
+    }
+    
+    protected override string GetCompletionBox()
+    {
+        string completionBox = "[ ]";
+        if (IsComplete())
+        {
+            completionBox = "[X]";
+        }
+        else if (GetIterationsCompleted() != 0)
+        {
+            completionBox = "[-]"; 
+        }
+        return completionBox;
     }
 
     private int GetIterationAmountToComplete()

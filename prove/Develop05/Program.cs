@@ -17,10 +17,10 @@ class Program
         _menuOptions.Add("Save Goals and Quit");
         _menuOptions.Add("Quit without Saving");
 
-        void ClearConsole()
-        {
-            Console.Clear();
-        }
+        // void ClearConsole()
+        // {
+        //     Console.Clear();
+        // }
 
         void DisplayPoints()
         {
@@ -108,7 +108,8 @@ class Program
             DisplayPoints();
             ListMenu();
             ChooseOption();
+            Console.WriteLine();
         }
-        ClearConsole();
+        // ClearConsole();
     }
 }

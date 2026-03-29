@@ -28,7 +28,7 @@ abstract public class Goal
         _points = points;
     }
 
-    private void SetIsComplete(bool isComplete)
+    protected void SetIsComplete(bool isComplete)
     {
         _isComplete = isComplete;
     }
@@ -43,7 +43,7 @@ abstract public class Goal
         Console.WriteLine(GetName());
     }
 
-    protected string GetCompletionBox()
+    virtual protected string GetCompletionBox()
     {
         string completionBox = "[ ]";
         if (IsComplete())
@@ -51,11 +51,6 @@ abstract public class Goal
             completionBox = "[X]";
         }
         return completionBox;
-    }
-
-    public bool IsComplete()
-    {
-        return _isComplete;
     }
 
     protected string GetName()
@@ -68,20 +63,25 @@ abstract public class Goal
         return _description;
     }
 
-    // protected string GetCompleted()
-    // {
-    //     string completed = "False";
-    //     if (IsComplete())
-    //     {
-    //         completed = "True";
-    //     }
-    //     return completed;
-    // }
+    protected string GetCompleted()
+    {
+        string completed = "False";
+        if (IsComplete())
+        {
+            completed = "True";
+        }
+        return completed;
+    }
+
+    public bool IsComplete()
+    {
+        return _isComplete;
+    }
 
     virtual public int MarkAsComplete()
     {
         _isComplete = true;
-        return _points;
+        return GetPoints();
     }
 
     public int GetPoints()
