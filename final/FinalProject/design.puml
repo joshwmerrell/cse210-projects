@@ -1,0 +1,118 @@
+@startuml
+
+    class Program
+    {
+        ClearTerminal()
+        GiveIntro()
+        DisplayMenu()
+        Search()
+        GetSearchResult()
+    }
+
+    class Search(input : string)
+    {
+        -_searchDepth : int
+    }
+
+    class SearchVolume(input : string)
+    {
+        
+    }
+
+    class SearchBook(input : string)
+    {
+
+    }
+
+    class SearchVerse(input : string)
+    {
+
+    }
+
+    class Scriptures()
+    {
+        -_volumes : List<volume>
+        +SetScriptures() : void
+        -SetVolume(scriptureInfo : string) : void
+        +Search(searchDepth : int, searchInquiry : string) : List<string>
+        ' -SearchDepth(searchingFor : string) : int
+        -GetResults() : List<string>
+    }
+
+    class Volume()
+    {
+        -_volumeNumber : int
+        -_books : List<Book>
+        +SetScriptures(scriptureInfo : string) : void
+        -SetVolumeNumber(number : int) : void
+        -SetBook(scriptureInfo : string) : void
+        ' +Search(searchDepth : int, searchInquiry : string) : List<string>
+        +GetResultPositions(searchDepth : int, searchInquiry : string) : List<string>
+        -GetResultPosition(searchDepth : int, searchInquiry : string) : string
+        -GetVolumeNumber() : int
+        -GetResults(positions : string) : List<string>
+        -GetResult(position : string) : string
+
+    }
+
+    class Book()
+    {
+        -_bookNumber : int
+        -_chapters : List<Chapter>
+        +SetScriptures(scriptureInfo : string) : void
+        -SetBookNumber(number : int) : void
+        -SetChapter(scriptureInfo : string) : void
+        ' +Search(searchDepth : int, searchInquiry : string) : List<string>
+        +GetResultPositions(searchDepth : int, searchInquiry : string) : List<string>
+        +GetResultPosition(searchDepth : int, searchInquiry : string) : string
+        -GetBookNumber() : int
+        -GetResults(positions : string) : List<string>
+        -GetResult(position : string) : string
+    }
+
+    class Chapter()
+    {
+        -_chapterNumber : int
+        -_verses : List<Verses>
+        +SetScriptures(scriptureInfo : string) : void
+        -SetChapterNumber(number : int) : void
+        -SetVerse(scriptureInfo : string) : void
+        ' +Search(searchDepth : int, searchInquiry : string) : List<string>
+        +GetResultPositions(searchDepth : int, searchInquiry : string) : List<string>
+        +GetResultPosition(searchDepth : int, searchInquiry : string) : string
+        -GetChapterNumber() : int
+        -GetResults(positions : string) : List<string>
+        -GetResult(position : string) : string
+
+    }
+
+    class Verse()
+    {
+        -_verseNumber : int
+        -_wholeVerse : string
+        -_words : List<Word>
+        +SetScripture(scriptureInfo : string) : void
+        -SetVerseNumber(number : int) : void
+        -SetWord(word : string) : void
+        ' +Search(searchDepth : int, searchInquiry : string) : List<string>
+        +GetResultPosition(searchDepth : int, searchInquiry : string) : string
+        -PhraseIsPresent(searchInquiry : string) : bool
+        -WordIsPresent(searchInquiry : string) : bool
+        -GetVerseNumber() : int
+        -GetResults(positions : string) : List<string>
+        -GetResult(position : string) : string
+    }
+
+    class Word()
+    {
+        -_letters : List<string>
+        +Set(word : string) : void
+        -SetLetter(letter : string) : void
+        +WordMatches(word : string) : bool
+        -GetWord() : string
+        -GetLetter() : string
+    }
+
+
+
+@enduml
