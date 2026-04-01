@@ -1,37 +1,48 @@
-@startuml
+@startuml design
 
     class Program
     {
+        -_commands : List<string>
         ClearTerminal()
         GiveIntro()
         DisplayMenu()
         Search()
+        GetCommand()
         GetSearchResult()
     }
 
-    class Search(input : string)
+    class Search
     {
         -_searchDepth : int
+        +Search(input : string)
+        +GetSearchDepth()
     }
 
-    class SearchVolume(input : string)
+    class SearchVolume
     {
-        
+        -_searchDepth : int
+        +SearchVolume(input : string)
+        -Result(searchDepth : int, input : string)
     }
 
-    class SearchBook(input : string)
+    class SearchBook
     {
-
+        -_searchDepth : int
+        +SearchBook(input : string)
+        -Result(searchDepth : int, input : string)
     }
 
-    class SearchVerse(input : string)
+    class SearchVerse
     {
-
+        -_searchDepth : int
+        +SearchVerse(input : string)
+        -Result(searchDepth : int, input : string)
     }
 
-    class Scriptures()
+    class Scriptures
     {
         -_volumes : List<volume>
+        +Scriptures(scriptureInfo : string)
         +SetScriptures() : void
         -SetVolume(scriptureInfo : string) : void
         +Search(searchDepth : int, searchInquiry : string) : List<string>
@@ -39,10 +50,11 @@
         -GetResults() : List<string>
     }
 
-    class Volume()
+    class Volume
     {
         -_volumeNumber : int
         -_books : List<Book>
+        +Volume(scriptureInfo : string)
         +SetScriptures(scriptureInfo : string) : void
         -SetVolumeNumber(number : int) : void
         -SetBook(scriptureInfo : string) : void
@@ -55,10 +67,11 @@
 
     }
 
-    class Book()
+    class Book
     {
         -_bookNumber : int
         -_chapters : List<Chapter>
+        +Book(scriptureInfo : string)
         +SetScriptures(scriptureInfo : string) : void
         -SetBookNumber(number : int) : void
         -SetChapter(scriptureInfo : string) : void
@@ -70,10 +83,11 @@
         -GetResult(position : string) : string
     }
 
-    class Chapter()
+    class Chapter
     {
         -_chapterNumber : int
         -_verses : List<Verses>
+        +Chapter(scriptureInfo : string)
         +SetScriptures(scriptureInfo : string) : void
         -SetChapterNumber(number : int) : void
         -SetVerse(scriptureInfo : string) : void
@@ -86,7 +100,7 @@
 
     }
 
-    class Verse()
+    class Verse
     {
         -_verseNumber : int
         -_wholeVerse : string
@@ -103,8 +117,10 @@
         -GetResult(position : string) : string
     }
 
-    class Word()
+    class Word
     {
+        ' -_alphabet : List<string>
+        ' -_letterPosition : List<int>
         -_letters : List<string>
         +Set(word : string) : void
         -SetLetter(letter : string) : void
@@ -114,5 +130,19 @@
     }
 
 
+    Program <.. SearchVolume
+    Program <.. SearchBook
+    Program <.. SearchVerse
+    SearchVolume --|> Search
+    SearchBook --|> Search
+    SearchVerse --|> Search
+    SearchVolume <.. Scriptures
+    SearchBook <.. Scriptures
+    SearchVerse <.. Scriptures
+    Scriptures <.. Volume
+    Volume <.. Book
+    Book <.. Chapter
+    Chapter <.. Verse
+    Verse <.. Word
 
 @enduml
