@@ -130,19 +130,19 @@
     }
 
 
-    Program <.. SearchVolume
-    Program <.. SearchBook
-    Program <.. SearchVerse
-    SearchVolume --|> Search
-    SearchBook --|> Search
-    SearchVerse --|> Search
-    SearchVolume <.. Scriptures
-    SearchBook <.. Scriptures
-    SearchVerse <.. Scriptures
-    Scriptures <.. Volume
-    Volume <.. Book
-    Book <.. Chapter
-    Chapter <.. Verse
-    Verse <.. Word
+    Program <-- SearchVolume
+    Program <-- SearchBook
+    Program <-- SearchVerse
+    SearchVolume <|-- Search
+    SearchBook <|-- Search
+    SearchVerse <|-- Search
+    SearchVolume <-- Scriptures
+    SearchBook <-- Scriptures
+    SearchVerse <-- Scriptures
+    Scriptures o-- Volume
+    Volume *-- Book
+    Book *-- Chapter
+    Chapter *-- Verse
+    Verse *-- Word
 
 @enduml
