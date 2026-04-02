@@ -32,6 +32,11 @@
         -Result(searchDepth : int, input : string)
     }
 
+    ' class SearchChapter
+    ' {
+
+    ' }
+
     class SearchVerse
     {
         -_searchDepth : int
