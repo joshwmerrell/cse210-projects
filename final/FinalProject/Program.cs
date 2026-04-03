@@ -67,25 +67,25 @@ class Program
                 string searchingFor = GetSearchingFor(inquiry);
                 if (command == commands[0])
                 {
-                    Search search = new SearchVolume(command, searchingFor);
+                    Search search = new SearchForVolume(command, searchingFor);
                     // string result = search.Result();
                     result = "Searched for a volume.";
                 }
                 else if (command == commands[1])
                 {
-                    Search search = new SearchBook(command, searchingFor);
+                    Search search = new SearchForBook(command, searchingFor);
                     // string result = search.Result();
                     result = "Searched for a book.";
                 }
                 else if (command == commands[2])
                 {
-                    Search search = new SearchVerse(command, searchingFor);
+                    Search search = new SearchForVerse(command, searchingFor);
                     // string result = search.Result();
                     result = "Searched for a verse.";
                 }
                 else if (command == commands[3])
                 {
-                    Search search = new SearchWord(command, searchingFor);
+                    Search search = new SearchForWord(command, searchingFor);
                     // string result = search.Result();
                     result = "Searched for a word.";
                 }
