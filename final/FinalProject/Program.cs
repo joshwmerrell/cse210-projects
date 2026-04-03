@@ -4,13 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        bool _continueProgram = true;
-        List<string> _commands = new List<string>{};
-        _commands.Add("volume");
-        _commands.Add("book");
-        // _commands.Add("chapter");
-        _commands.Add("verse");
-        _commands.Add("word");
+        bool continueProgram = true;
+        List<string> commands = new List<string>{"volume", "book", "verse", "word"};
 
         void ClearTerminal()
         {
@@ -35,15 +30,22 @@ class Program
             Console.WriteLine();
         }
 
+
+        // 
+        // 
+        //
         void Search()
         {
             string inquiry = GetInquiry();
-            if (_continueProgram)
+            if (continueProgram)
             {
                 string result = GetSearchResult(inquiry);
                 Console.WriteLine(result);
             }
         }
+        // 
+        // 
+        // 
 
         string GetInquiry()
         {
@@ -51,28 +53,49 @@ class Program
             string input = Console.ReadLine();
             if (input == "exit")
             {
-                _continueProgram = false;
+                continueProgram = false;
             }
             return input;
         }
 
         string GetSearchResult(string inquiry)
         {
-            if (CommandAndSearchIsGiven(inquiry))
+            string result = "Please enter a command and a search inquiry.";
+            if (CommandAndSearchAreGiven(inquiry))
             {
-                GetCommand(inquiry);
-                GetSearchingFor(inquiry);
-                return "Search Found";
+                string command = GetCommand(inquiry);
+                string searchingFor = GetSearchingFor(inquiry);
+                if (command == commands[0])
+                {
+                    Search search = new SearchVolume(command, searchingFor);
+                    // string result = search.Result();
+                    result = "Searched for a volume.";
+                }
+                else if (command == commands[1])
+                {
+                    Search search = new SearchBook(command, searchingFor);
+                    // string result = search.Result();
+                    result = "Searched for a book.";
+                }
+                else if (command == commands[2])
+                {
+                    Search search = new SearchVerse(command, searchingFor);
+                    // string result = search.Result();
+                    result = "Searched for a verse.";
+                }
+                else if (command == commands[3])
+                {
+                    Search search = new SearchWord(command, searchingFor);
+                    // string result = search.Result();
+                    result = "Searched for a word.";
+                }
             }
-            else
-            {
-                return "Please enter a command and a search inquiry.";
-            }
+            return result;
         }
 
-        bool CommandAndSearchIsGiven(string inquiry)
+        bool CommandAndSearchAreGiven(string inquiry)
         {
-            if (inquiry.Split("@ ").Length > 1 && IsCommand(GetCommand(inquiry)))
+            if (inquiry.Split("@ ").Length > 1 && IsACommand(GetCommand(inquiry)))
             {
                 return true;
             }
@@ -82,10 +105,10 @@ class Program
             }
         }
 
-        bool IsCommand(string commandGiven)
+        bool IsACommand(string commandGiven)
         {
             bool IsCommand = false;
-            foreach (string command in _commands)
+            foreach (string command in commands)
             {
                 if (commandGiven == command)
                 {
@@ -109,7 +132,7 @@ class Program
 
         ClearTerminal();
         GiveIntro();
-        while (_continueProgram)
+        while (continueProgram)
         {
             Console.WriteLine();
             DisplayMenu();
