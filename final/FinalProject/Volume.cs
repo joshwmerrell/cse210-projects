@@ -20,20 +20,19 @@ public class Volume : Scripture
             int currentBookId = int.Parse(line.Split(",")[1]);
             if (bookNumber == 0)
             {
+                bookNumber = 1;
                 allPreviousBooks = currentBookId - 1;
-                bookNumber = currentBookId - allPreviousBooks;
             }
             else if (csvLineCount == csvLines.Count)
             {
                 bookCsvLines.Add(line);
-                _books.Add(new Book(bookCsvLines));
+                _books.Add(new Book(bookNumber, bookCsvLines));
             }
             else if (bookNumber != currentBookId - allPreviousBooks)
             {
-                _books.Add(new Book(bookCsvLines));
+                _books.Add(new Book(bookNumber, bookCsvLines));
                 bookCsvLines.Clear();
-                allPreviousBooks = currentBookId - 1;
-                bookNumber = currentBookId - allPreviousBooks;
+                bookNumber++;
             }
             bookCsvLines.Add(line);
         }
