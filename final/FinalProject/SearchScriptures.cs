@@ -3,15 +3,46 @@ using System.IO.Pipelines;
 public class SearchScriptures
 {
     
-    private List<string> _commands = new List<string>{"volume", "book", "verse", "word"};
+    private List<string> _commands = new List<string>{"volume", "book", "chapter", "verse", "word"};
     private int _searchDepth;
     private List<Volume> _scriptures = new List<Volume>{};
     private string _result = "Please enter a command and a search inquiry.";
 
     public SearchScriptures(List<string> scripturesCsvLines, string inquiry)
     {
-        SetScriptures(scripturesCsvLines);
-        Console.WriteLine(Result(inquiry));
+        if (CommandAndSearchAreGiven(inquiry))
+        {
+            SetScriptures(scripturesCsvLines);
+            SetSearchDepth(GetCommand(inquiry));
+            SetResult(GetSearchResult(GetSearchDepth(), GetSearchString(inquiry)));
+        }
+        Console.WriteLine(GetResult());
+    }
+
+    private bool CommandAndSearchAreGiven(string inquiry)
+    {
+        if (inquiry.Split("@ ").Length > 1 && IsACommand(GetCommand(inquiry)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private bool IsACommand(string commandGiven)
+    {
+        bool IsCommand = false;
+        foreach (string command in GetCommands())
+        {
+            if (commandGiven == command)
+            {
+                IsCommand = true;
+                break;
+            }
+        }
+        return IsCommand;
     }
 
     private void SetScriptures(List<string> lines)
@@ -42,54 +73,18 @@ public class SearchScriptures
 
     }
 
-    public string Result(string inquiry)
+    private void SetSearchDepth(string commandGiven)
     {
-        if (CommandAndSearchAreGiven(inquiry))
-        {
-            SetResult("Result found");
-        }
-        return GetResult(); 
-    }
-
-    private void SetResult(string result)
-    {
-        _result = result;
-    }
-
-    private string GetResult()
-    {
-        return _result;
-    }
-
-    private bool CommandAndSearchAreGiven(string inquiry)
-    {
-        if (inquiry.Split("@ ").Length > 1 && IsACommand(GetCommand(inquiry)))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    private bool IsACommand(string commandGiven)
-    {
-        bool IsCommand = false;
+        int i = 0;
         foreach (string command in GetCommands())
         {
             if (commandGiven == command)
             {
-                IsCommand = true;
+                _searchDepth = i;
                 break;
             }
+            i++;
         }
-        return IsCommand;
-    }
-
-    private List<string> GetCommands()
-    {
-        return _commands;
     }
 
     private string GetCommand(string inquiry)
@@ -97,18 +92,44 @@ public class SearchScriptures
         return inquiry.Split("@ ")[0].ToLower();
     }
 
-    private string GetSearchingFor(string inquiry)
+    private void SetResult(string result)
     {
-        return inquiry.Split("@ ")[1].ToLower();
+        _result = result;
     }
 
-    protected void SetSearchDepth(int depth)
+    // 
+    // 
+    // 
+    private string GetSearchResult(int searchDepth, string searchString)
     {
-        _searchDepth = depth;
+        return "Results Found";
     }
+    // 
+    // 
+    //
 
-    protected int GetSearchDepth()
+    private int GetSearchDepth()
     {
         return _searchDepth;
     }
+
+    private string GetSearchString(string inquiry)
+    {
+        return inquiry.Split("@ ")[1];
+    }
+
+    private string GetResult()
+    {
+        return _result;
+    }
+
+    private List<string> GetCommands()
+    {
+        return _commands;
+    }
+
+    // private string GetSearchingFor(string inquiry)
+    // {
+    //     return inquiry.Split("@ ")[1].ToLower();
+    // }
 }
