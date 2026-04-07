@@ -12,5 +12,10 @@ public class Verse : Scripture
     protected override void SetScriptures(List<string> verseInListForm)
     {
         string verse = verseInListForm[0];
+        wholeVerse = verse;
+        foreach (string wordAndPunctuation in verse.Split(" "))
+        {
+            _words.Add(new Word(wordAndPunctuation));
+        }
     }
 }

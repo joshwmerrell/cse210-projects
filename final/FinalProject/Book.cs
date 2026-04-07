@@ -29,7 +29,7 @@ public class Book : Scripture
         foreach (string line in csvLines)
         {
             csvLineCount++;
-            int chapterNumber = int.Parse(line.Split(",")[14]);
+            int chapterNumber = GetChapterNumber(line);
             if (previousChapterNumber == 0)
             {
             }
@@ -46,5 +46,31 @@ public class Book : Scripture
             chapterCsvLines.Add(line);
             previousChapterNumber = chapterNumber;
         }
+    }
+
+    private int GetChapterNumber(string csvLine)
+    {
+        List<string> reversedCsvLineSplitByQuotationMark = new List<string>{};
+        foreach (string piece in csvLine.Split('"'))
+        {
+            reversedCsvLineSplitByQuotationMark.Insert(0, piece);
+        }
+        // Reverse the next piece again!
+        // 10 instead of 6 (+2 or +4) if there are words quoted within the scripture. If words quoted, the [2] will be "".
+        // BECAUSE OF THIS CHANGE OF THERE BEING QUOTED TEXT WITHIN THE VERSE, THERE WILL BE VERSES IN THE D&C AND POFGP INCOMPLETE.
+        int csvPieceIndexWithinLine = 6;
+        string csvPiece = reversedCsvLineSplitByQuotationMark[csvPieceIndexWithinLine];
+        while (csvPiece == "")
+        {
+            csvPieceIndexWithinLine += 2;
+            csvPiece = reversedCsvLineSplitByQuotationMark[csvPieceIndexWithinLine];
+        }
+        List<string> reversedCsvPieceSplitByComma = new List<string>{};
+        foreach (string part in csvPiece.Split(","))
+        {
+            reversedCsvPieceSplitByComma.Insert(0, part);
+        }
+        int number = int.Parse(reversedCsvPieceSplitByComma[2]);
+        return number;
     }
 }

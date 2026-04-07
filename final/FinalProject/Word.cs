@@ -4,8 +4,9 @@ public class Word
     private List<int> _lettersPositions = new List<int>{};
     public Word(string wordAndPunctuation)
     {
-        foreach (string letterOrPunctuation in wordAndPunctuation.Split())
+        foreach (char charLetterOrPunctuation in wordAndPunctuation.ToCharArray())
         {
+            string letterOrPunctuation = charLetterOrPunctuation.ToString();
             int i = 0;
             foreach (string alph in GetAlphabet())
             {
