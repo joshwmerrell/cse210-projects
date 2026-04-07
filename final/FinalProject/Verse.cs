@@ -3,14 +3,14 @@ public class Verse : Scripture
     string wholeVerse;
     List<Word> _words = new List<Word>{};
 
-    public Verse(int number, List<string> csvLineInListForm) : base()
+    public Verse(int number, List<string> verseInListForm) : base()
     {
         SetNumber(number);
-        SetScriptures(csvLineInListForm);
+        SetScriptures(verseInListForm);
     }
 
-    protected override void SetScriptures(List<string> csvLineInListForm)
+    protected override void SetScriptures(List<string> verseInListForm)
     {
-        // string[] wordsAndPunctuationSplit = csvLineInListForm[0].Split(" ");
+        string verse = verseInListForm[0];
     }
 }
