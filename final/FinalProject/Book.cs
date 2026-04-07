@@ -7,7 +7,7 @@ public class Book : Scripture
         
     }
 
-    protected override void SetWordsOfGod()
+    protected override void SetScriptures(List<string> csvLines)
     {
         
     }

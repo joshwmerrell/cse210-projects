@@ -17,7 +17,7 @@ abstract public class Scripture
         _name = name;
     }
 
-    abstract protected void SetWordsOfGod();
+    abstract protected void SetScriptures(List<string> scriptures);
 
     protected int GetNumber()
     {

@@ -26,15 +26,15 @@ public class SearchScriptures
             if (previousVolumeNumber == "0")
             {
             }
-            else if (previousVolumeNumber != volumeNumber)
-            {
-                _scriptures.Add(new Volume(volumeCsvLines));
-                volumeCsvLines.Clear();
-            }
             else if (lineCount == lines.Count)
             {
                 volumeCsvLines.Add(line);
                 _scriptures.Add(new Volume(volumeCsvLines));
+            }
+            else if (previousVolumeNumber != volumeNumber)
+            {
+                _scriptures.Add(new Volume(volumeCsvLines));
+                volumeCsvLines.Clear();
             }
             volumeCsvLines.Add(line);
             previousVolumeNumber = volumeNumber;

@@ -3,20 +3,39 @@ public class Volume : Scripture
     private List<Book> _books = new List<Book>{};
     public Volume(List<string> volumeCsvLines) : base()
     {
-        int i = 0;
-        foreach (string line in volumeCsvLines)
-        {
-            if (i == 0)
-            {
-                SetNumber(int.Parse(line.Split(",")[0]));
-                SetName(line.Split(",")[6].Split('"')[1]);
-            }
-            i++;
-        }
+        SetNumber(int.Parse(volumeCsvLines[0].Split(",")[0]));
+        SetName(volumeCsvLines[0].Split(",")[6].Split('"')[1]);
+        SetScriptures(volumeCsvLines);
     }
 
-    override protected void SetWordsOfGod()
+    override protected void SetScriptures(List<String> csvLines)
     {
-        
+        List<string> bookCsvLines = new List<string>{};
+        int bookNumber = 0;
+        int allPreviousBooks = 0;
+        int csvLineCount = 0;
+        foreach (string line in csvLines)
+        {
+            csvLineCount++;
+            int currentBookId = int.Parse(line.Split(",")[1]);
+            if (bookNumber == 0)
+            {
+                allPreviousBooks = currentBookId - 1;
+                bookNumber = currentBookId - allPreviousBooks;
+            }
+            else if (csvLineCount == csvLines.Count)
+            {
+                bookCsvLines.Add(line);
+                _books.Add(new Book(bookCsvLines));
+            }
+            else if (bookNumber != currentBookId - allPreviousBooks)
+            {
+                _books.Add(new Book(bookCsvLines));
+                bookCsvLines.Clear();
+                allPreviousBooks = currentBookId - 1;
+                bookNumber = currentBookId - allPreviousBooks;
+            }
+            bookCsvLines.Add(line);
+        }
     }
 }
