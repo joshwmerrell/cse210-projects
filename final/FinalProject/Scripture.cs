@@ -12,7 +12,7 @@ abstract public class Scripture
         _number = number;
     }
 
-    protected void SetName(string name)
+    virtual protected void SetName(string name)
     {
         _name = name;
     }
