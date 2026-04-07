@@ -73,4 +73,21 @@ public class Book : Scripture
         int number = int.Parse(reversedCsvPieceSplitByComma[2]);
         return number;
     }
+
+    public override string GetSearch(int searchDepth, string searchString)
+    {
+        if (searchDepth == 0)
+        {
+            return BookSearch(searchString);
+        }
+        else
+        {
+            return ""; 
+        }
+    }
+
+    private string BookSearch(string searchString)
+    {
+        return "";
+    }
 }

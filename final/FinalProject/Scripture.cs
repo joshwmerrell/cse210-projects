@@ -19,12 +19,14 @@ abstract public class Scripture
 
     abstract protected void SetScriptures(List<string> scriptures);
 
-    protected int GetNumber()
+    abstract public string GetSearch(int searchDepth, string searchString);
+
+    public int GetNumber()
     {
         return _number;
     }
 
-    protected string GetName()
+    public string GetName()
     {
         return _name;
     }
