@@ -1,0 +1,112 @@
+@startuml final design
+
+class Program
+{
+    SetScriptures() : void
+    GetScriptures() : List<string>
+    ClearTerminal() : void
+    GiveIntro() : void
+    DisplayMenu() : void
+    Search() : void
+    GetInquiry() : string
+}
+
+class SearchScriptures
+{
+    -_commands : List<string>
+    -_searchDepth : int
+    -_scriptures : List<Volume>
+    -_result : string
+    +SearchScriptures(scripturesCsvLines : List<string>, inquiry : string)
+    -CommandAndSearchAreGiven(inquiry : string) : bool
+    -IsACommand(commandGiven :string) : bool
+    -SetScriptures(lines List<string>)
+    -SetSearchDepth(commandGiven : string) : void
+    -GetCommand(inquiry : string)
+    -SetResult(result : string) : void
+    -GetSearchResult(searchDepth : int, searchString : string) : string
+    -GetSearchDepth() : int
+    -GetSearchString(inquiry : string)
+    -GetResult() : string
+    -GetCommands() : List<string>
+    -GetScriptures() : List<Volume>
+}
+
+abstract Scripture
+{
+    -_number : int
+    -_name : string
+    +Scripture()
+    -SetNumber(number : int) : void
+    -Setname(name : string) : void
+    -SetScriptures(scriptures : List<string>) : void
+    +GetSearch(searchDepth : int, searchString : string) : string
+    +GetNumber() : int
+    +GetName() : string
+}
+
+class Volume
+{
+    -_books : List<Book>
+    +Volume(volumeCsvLines : List<string>)
+    -SetScriptures(csvLines : List<string>) : void
+    +GetSearch(searchDepth : int, searchString : string) : string
+    -VolumeSearch(searchString : string) : string
+    -ListAllBooks() : string
+    -GetBooks() : List<Book>
+}
+
+class Book
+{
+    -_chapters : List<Chapter>
+    +Book(number : int, bookCsvLines : List<string>)
+    -SetName(name : string) : void
+    -SetScriptures(csvLines : List<string>) : void
+    -GetChapterNumber(csvLine : string) : int
+    +GetSearch(searchDepth : int, searchString : string) : string
+    -BookSearch(searchString : string) : string
+    -GetChapterAndVersesNumbers() : string
+    - GetChapters() : List<Chapter>
+
+}
+
+class Chapter
+{
+    -_verses : List<Verse>
+    +Chapter(number : int, chapterCsvLines : List<string>)
+    -SetScriptures(csvLine : List<string>) : void
+    -GetVerseNumber(csvLine : string) : int
+    -GetVerseNames(csvLine : string) : List<string>
+    +GetSearch(searchDepth : int, searchString : string) : string
+    -ChapterSearch(searchString : string) : string
+    -GetVerses() : List<Verse>
+    +GetVerseAmount() : int
+}
+
+class Verse
+{
+    -_shortName : string
+    -_longName : string
+    -_wholeVerse : string
+    -_words : List<Word>
+    +Verse(number : int, names : List<string>, verseInListFormat)
+    -SetNames(names : List<string>) : void
+    -SetScriptures(verseInListFormat : List<string>) : void
+    +GetSearch(searchDepth : int, searchString : string) : string
+    -VerseSearch(searchString : string) : string
+    -GetShortName() : string
+    -GetLongName() : string
+    -GetWholeName() : string
+}
+
+class Word
+{
+    -_alphabet : List<string>
+    -_lettersPositions : List<int>
+    +Word(wordAndPunctuation : string)
+    +Get() : string
+    -GetAlphabet() : List<string>
+    -GetLettersPositions() : List<int>
+}
+
+@enduml

@@ -42,7 +42,7 @@ class Program
         void DisplayMenu()
         {
             Console.WriteLine("Search for...");
-            Console.WriteLine("  word@ [enter word or phrase]");
+            // Console.WriteLine("  word@ [enter word or phrase]");
             // Console.WriteLine("  verse@ [enter verse or verses]");
             Console.WriteLine("  verse@ [enter verse]");
             // Console.WriteLine("  chapter@ [enter chapter]");
@@ -86,92 +86,5 @@ class Program
             Search();
         }
         ClearTerminal();
-
-
-
-
-        
-
-        // string GetSearchResult(string inquiry)
-        // {
-        //     string result = "Please enter a command and a search inquiry.";
-        //     if (CommandAndSearchAreGiven(inquiry))
-        //     {
-        //         string command = GetCommand(inquiry);
-        //         string searchingFor = GetSearchingFor(inquiry);
-        //         if (command == commands[0])
-        //         {
-        //             Search search = new SearchForVolume(command, searchingFor);
-        //             // string result = search.Result();
-        //             result = "Searched for a volume.";
-        //         }
-        //         else if (command == commands[1])
-        //         {
-        //             Search search = new SearchForBook(command, searchingFor);
-        //             // string result = search.Result();
-        //             result = "Searched for a book.";
-        //         }
-        //         else if (command == commands[2])
-        //         {
-        //             Search search = new SearchForVerse(command, searchingFor);
-        //             // string result = search.Result();
-        //             result = "Searched for a verse.";
-        //         }
-        //         else if (command == commands[3])
-        //         {
-        //             Search search = new SearchForWord(command, searchingFor);
-        //             // string result = search.Result();
-        //             result = "Searched for a word.";
-        //         }
-        //     }
-        //     return result;
-        // }
-
-        // bool CommandAndSearchAreGiven(string inquiry)
-        // {
-        //     if (inquiry.Split("@ ").Length > 1 && IsACommand(GetCommand(inquiry)))
-        //     {
-        //         return true;
-        //     }
-        //     else
-        //     {
-        //         return false;
-        //     }
-        // }
-
-        // bool IsACommand(string commandGiven)
-        // {
-        //     bool IsCommand = false;
-        //     foreach (string command in commands)
-        //     {
-        //         if (commandGiven == command)
-        //         {
-        //             IsCommand = true;
-        //             break;
-        //         }
-        //     }
-        //     return IsCommand;
-        // }
-
-        // string GetCommand(string inquiry)
-        // {
-        //     return inquiry.Split("@ ")[0].ToLower();
-        // }
-
-        // string GetSearchingFor(string inquiry)
-        // {
-        //     return inquiry.Split("@ ")[1].ToLower();
-        // }
-
-
-        // ClearTerminal();
-        // GiveIntro();
-        // while (continueProgram)
-        // {
-        //     Console.WriteLine();
-        //     DisplayMenu();
-        //     Search();
-        // }
-        // ClearTerminal();
     }
 }

@@ -10,7 +10,7 @@ public class Volume : Scripture
         SetScriptures(volumeCsvLines);
     }
 
-    override protected void SetScriptures(List<String> csvLines)
+    override protected void SetScriptures(List<string> csvLines)
     {
         List<string> bookCsvLines = new List<string>{};
         int bookNumber = 0;
@@ -48,7 +48,12 @@ public class Volume : Scripture
         }
         else
         {
-            return "";
+            string bookSearchResult = "";
+            foreach (Book book in GetBooks())
+            {
+                bookSearchResult = bookSearchResult + book.GetSearch(searchDepth - 1, searchString);
+            }
+            return bookSearchResult;
         }
     }
 
@@ -76,7 +81,7 @@ public class Volume : Scripture
 
         if (amountWordsMatched / splitSearchString.Length >= 0.5)
         {
-            return $"Matched: {GetName()}:\n{GetAllBooks()}";
+            return $"Matched: {GetName()}:\n{ListAllBooks()}";
         }
         else
         {
@@ -84,7 +89,7 @@ public class Volume : Scripture
         }
     }
 
-    private string GetAllBooks()
+    private string ListAllBooks()
     {
         string books = "";
         foreach (Book book in GetBooks())

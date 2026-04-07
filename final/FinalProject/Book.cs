@@ -56,7 +56,7 @@ public class Book : Scripture
             reversedCsvLineSplitByQuotationMark.Insert(0, piece);
         }
         // Reverse the next piece again!
-        // 10 instead of 6 (+2 or +4) if there are words quoted within the scripture. If words quoted, the [2] will be "".
+        // 10 instead of 6 (+2 or +4) if there are words quoted within the scripture. If words quoted, the [6] will be "".
         // BECAUSE OF THIS CHANGE OF THERE BEING QUOTED TEXT WITHIN THE VERSE, THERE WILL BE VERSES IN THE D&C AND POFGP INCOMPLETE.
         int csvPieceIndexWithinLine = 6;
         string csvPiece = reversedCsvLineSplitByQuotationMark[csvPieceIndexWithinLine];
@@ -82,12 +82,59 @@ public class Book : Scripture
         }
         else
         {
-            return ""; 
+            string chapterSearchResult = "";
+            foreach (Chapter chapter in GetChapters())
+            {
+                chapterSearchResult = chapterSearchResult + chapter.GetSearch(searchDepth - 1, searchString);
+            }
+            return chapterSearchResult;
         }
     }
 
     private string BookSearch(string searchString)
     {
-        return "";
+        string[] splitSearchString = searchString.Split(" ");
+        List<string> splitBookName = new List<string>{};
+        foreach (string word in GetName().Split(" "))
+        {
+            splitBookName.Add(word);
+        }
+
+        double amountWordsMatched = 0;
+        foreach (string searchWord in splitSearchString)
+        {
+            foreach (string nameWord in splitBookName)
+            {
+                if (searchWord.ToLower() == nameWord.ToLower())
+                {
+                    amountWordsMatched += 1;
+                    break;
+                }
+            }
+        }
+
+        if (amountWordsMatched / splitSearchString.Length >= 0.5)
+        {
+            return $"Matched: {GetName()}:\n{GetChapterAndVersesNumbers()}";
+        }
+        else
+        {
+            return ""; 
+        }
+    }
+
+    private string GetChapterAndVersesNumbers()
+    {
+        string numbers = "";
+        foreach (Chapter chapter in GetChapters())
+        {
+            numbers = numbers + $"{chapter.GetNumber()}:{chapter.GetVerseAmount()}\n";
+        }
+        return numbers;
+    }
+
+    private List<Chapter> GetChapters()
+    {
+        return _chapters;
     }
 }
