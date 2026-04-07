@@ -1,7 +1,7 @@
 abstract public class Scripture
 {
     private int _number;
-    private string _name;
+    protected string _name;
 
     public Scripture()
     {
