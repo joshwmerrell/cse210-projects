@@ -5,6 +5,28 @@ class Program
     static void Main(string[] args)
     {
         bool continueProgram = true;
+        List<string> scripturesCsvLines;
+
+        void SetScriptures()
+        {
+            // Will eventually add a loading bar and or number while this loads.
+            scripturesCsvLines = new List<string>{};
+            string[] csvLines = System.IO.File.ReadAllLines("lds-scriptures.csv");
+            int i = 0;
+            foreach (string line in csvLines)
+            {
+                if (i != 0)
+                {
+                    scripturesCsvLines.Add(line);
+                }
+                i++;
+            }
+        }
+
+        List<string> GetScriptures()
+        {
+            return scripturesCsvLines;
+        }
 
         void ClearTerminal()
         {
@@ -35,7 +57,7 @@ class Program
         {
             if (continueProgram)
             {
-                SearchScriptures search = new SearchScriptures(GetInquiry());
+                SearchScriptures search = new SearchScriptures(GetScriptures(), GetInquiry());
             }
             Console.WriteLine();
         }
@@ -56,6 +78,7 @@ class Program
 
 
         ClearTerminal();
+        SetScriptures();
         GiveIntro();
         while (continueProgram)
         {

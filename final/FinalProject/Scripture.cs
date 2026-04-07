@@ -2,7 +2,6 @@ abstract public class Scripture
 {
     private int _number;
     private string _name;
-    protected List<Scripture> _lightAndTruth;
 
     public Scripture()
     {
@@ -18,5 +17,15 @@ abstract public class Scripture
         _name = name;
     }
 
-    abstract protected void SetLightAndTruth();
+    abstract protected void SetWordsOfGod();
+
+    protected int GetNumber()
+    {
+        return _number;
+    }
+
+    protected string GetName()
+    {
+        return _name;
+    }
 }

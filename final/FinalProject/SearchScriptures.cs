@@ -8,44 +8,57 @@ public class SearchScriptures
     private List<Volume> _scriptures = new List<Volume>{};
     private string _result = "Please enter a command and a search inquiry.";
 
-    public SearchScriptures(string inquiry)
+    public SearchScriptures(List<string> scripturesCsvLines, string inquiry)
     {
-        // SetScriptures();
+        SetScriptures(scripturesCsvLines);
         Console.WriteLine(Result(inquiry));
     }
 
-    // 
-    // 
-    private void SetScriptures()
+    private void SetScriptures(List<string> lines)
     {
-        List<string> lines = new List<string>{};
-        string[] csvLines = System.IO.File.ReadAllLines("lds-scriptures.csv");
-        int i = 0;
-        foreach (string line in csvLines)
+        List<string> volumeCsvLines = new List<string>{};
+        string previousVolumeNumber = "0";
+        int lineCount = 0;
+        foreach (string line in lines)
         {
-            while (i != 0)
+            lineCount++;
+            string volumeNumber = line.Split(',')[0];
+            if (previousVolumeNumber == "0")
             {
-                lines.Add(line);
             }
-            i++;
+            else if (previousVolumeNumber != volumeNumber)
+            {
+                _scriptures.Add(new Volume(volumeCsvLines));
+                volumeCsvLines.Clear();
+            }
+            else if (lineCount == lines.Count)
+            {
+                volumeCsvLines.Add(line);
+                _scriptures.Add(new Volume(volumeCsvLines));
+            }
+            volumeCsvLines.Add(line);
+            previousVolumeNumber = volumeNumber;
         }
-        // SetVolumes(lines);
-    }
-    // 
-    //
 
-    // private void SetVolumes(List<string> lines)
-    // {
-        
-    // }
+    }
 
     public string Result(string inquiry)
     {
         if (CommandAndSearchAreGiven(inquiry))
         {
-            _result = "Result found";
+            SetResult("Result found");
         }
-        return _result; 
+        return GetResult(); 
+    }
+
+    private void SetResult(string result)
+    {
+        _result = result;
+    }
+
+    private string GetResult()
+    {
+        return _result;
     }
 
     private bool CommandAndSearchAreGiven(string inquiry)
