@@ -102,7 +102,20 @@ public class SearchScriptures
     // 
     private string GetSearchResult(int searchDepth, string searchString)
     {
-        return "Results Found";
+        string results = "Search Results:\n";
+        foreach (Volume volume in GetScriptures())
+        {
+            string volumeSearchResult = volume.GetSearch(searchDepth, searchString);
+            if (volumeSearchResult != "")
+            {
+                results = results + $"{volumeSearchResult}\n";
+            }
+        }
+        if (results == "Search Results:\n")
+        {
+            results = "Nothing Found.";
+        }
+        return results;
     }
     // 
     // 
@@ -126,6 +139,11 @@ public class SearchScriptures
     private List<string> GetCommands()
     {
         return _commands;
+    }
+
+    private List<Volume> GetScriptures()
+    {
+        return _scriptures;
     }
 
     // private string GetSearchingFor(string inquiry)
