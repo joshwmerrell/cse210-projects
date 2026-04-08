@@ -4,8 +4,10 @@ class Program
 {
     static void Main(string[] args)
     {
-
-        Console.WriteLine();
+        List<Scripture> _volumes = new List<Scripture>{};
+        List<Scripture> _books = new List<Scripture>{};
+        List<Scripture> _chapters = new List<Scripture>{};
+        List<Scripture> _verses = new List<Scripture>{};
 
         // bool continueProgram = true;
         // List<string> scripturesCsvLines;

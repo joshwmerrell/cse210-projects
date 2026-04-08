@@ -11,11 +11,11 @@ class Program
     DisplayInto() : void
     DisplayMenu() : void
     Search() : void
-    GetInquiry() : string
-    CommandAndSearchingForArePresent() : bool
-    CommandIsPresent() : bool
-    GetCommand(inquiry : string) : string
-    GetSearchingFor(inquiry : string) : string
+    ' GetInquiry() : string
+    ' CommandAndSearchingForArePresent() : bool
+    ' CommandIsPresent() : bool
+    ' GetCommand(inquiry : string) : string
+    ' GetSearchingFor(inquiry : string) : string
 }
 
 abstract Scripture
@@ -23,9 +23,9 @@ abstract Scripture
     -_number : int
     -_name : string
     +Scripture(scriptureCsvLine : string)
-    -SetNumber() : void
-    -SetName() : void
-    ~SetScripture() : void
+    ~SetNumber(number : int) : void
+    ~SetName(name : string) : void
+    ~SetScripture(csvList : List<string>) : void
     +GetNumber() : int
     +GetName() : string
     ~DisplaySearchResult() : void
@@ -35,7 +35,9 @@ class Volume
 {
     -_booksNames : List<string>
     +Volume(volumeCsvList : List<string>)
-    ~SetScripture() : void
+    ~SetNumber(number : int) : void
+    ~SetName(name : string) : void
+    ~SetScripture(csvList : List<string>) : void
     ~DisplaySearchResult() : void
 }
 
@@ -43,7 +45,9 @@ class Book
 {
     -_verseAmountInEachChapter : List<int>
     +Book(bookCsvList : List<string>)
-    ~SetScripture() : void
+    ~SetNumber(number : int) : void
+    ~SetName(name : string) : void
+    ~SetScripture(csvList : List<string>) : void
     ~DisplaySearchResult() : void
 }
 
@@ -51,7 +55,9 @@ class Chapter
 {
     -_verses : List<string>
     +Chapter(chapterCsvList : List<string>)
-    ~SetScripture() : void
+    ~SetNumber(number : int) : void
+    ~SetName(name : string) : void
+    ~SetScripture(csvList : List<string>) : void
     ~DisplaySearchResult() : void
 }
 
@@ -59,7 +65,9 @@ class Verse
 {
     -_verse : string
     +Verse(verseCsvList : string)
-    ~SetScripture() : void
+    ~SetNumber(number : int) : void
+    ~SetName(name : string) : void
+    ~SetScripture(csvList : List<string>) : void
     ~DisplaySearchResult() : void
 }
 
