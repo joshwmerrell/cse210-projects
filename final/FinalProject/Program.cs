@@ -4,87 +4,90 @@ class Program
 {
     static void Main(string[] args)
     {
-        bool continueProgram = true;
-        List<string> scripturesCsvLines;
 
-        void SetScriptures()
-        {
-            // Will eventually add a loading bar and or number while this loads.
-            scripturesCsvLines = new List<string>{};
-            string[] csvLines = System.IO.File.ReadAllLines("lds-scriptures.csv");
-            int i = 0;
-            foreach (string line in csvLines)
-            {
-                if (i != 0)
-                {
-                    scripturesCsvLines.Add(line);
-                }
-                i++;
-            }
-        }
+        Console.WriteLine();
 
-        List<string> GetScriptures()
-        {
-            return scripturesCsvLines;
-        }
+        // bool continueProgram = true;
+        // List<string> scripturesCsvLines;
 
-        void ClearTerminal()
-        {
-            Console.Clear();
-        }
+        // void SetScriptures()
+        // {
+        //     // Will eventually add a loading bar and or number while this loads.
+        //     scripturesCsvLines = new List<string>{};
+        //     string[] csvLines = System.IO.File.ReadAllLines("lds-scriptures.csv");
+        //     int i = 0;
+        //     foreach (string line in csvLines)
+        //     {
+        //         if (i != 0)
+        //         {
+        //             scripturesCsvLines.Add(line);
+        //         }
+        //         i++;
+        //     }
+        // }
 
-        void GiveIntro()
-        {
-            Console.Write("Welcome to the Scripture Searcher!");
-            Console.WriteLine();
-        }
+        // List<string> GetScriptures()
+        // {
+        //     return scripturesCsvLines;
+        // }
 
-        void DisplayMenu()
-        {
-            Console.WriteLine("Search for...");
-            // Console.WriteLine("  word@ [enter word or phrase]");
-            // Console.WriteLine("  verse@ [enter verse or verses]");
-            Console.WriteLine("  verse@ [enter verse]");
-            // Console.WriteLine("  chapter@ [enter chapter]");
-            Console.WriteLine("  book@ [enter book]");
-            Console.WriteLine("  volume@ [enter volume]");
-        }
+        // void ClearTerminal()
+        // {
+        //     Console.Clear();
+        // }
 
-        // 
-        // 
-        //
-        void Search()
-        {
-            if (continueProgram)
-            {
-                SearchScriptures search = new SearchScriptures(GetScriptures(), GetInquiry());
-            }
-            Console.WriteLine();
-        }
-        // 
-        // 
-        // 
+        // void GiveIntro()
+        // {
+        //     Console.Write("Welcome to the Scripture Searcher!");
+        //     Console.WriteLine();
+        // }
 
-        string GetInquiry()
-        {
-            Console.Write("> ");
-            string input = Console.ReadLine();
-            if (input == "exit")
-            {
-                continueProgram = false;
-            }
-            return input;
-        }
+        // void DisplayMenu()
+        // {
+        //     Console.WriteLine("Search for...");
+        //     // Console.WriteLine("  word@ [enter word or phrase]");
+        //     // Console.WriteLine("  verse@ [enter verse or verses]");
+        //     Console.WriteLine("  verse@ [enter verse]");
+        //     // Console.WriteLine("  chapter@ [enter chapter]");
+        //     Console.WriteLine("  book@ [enter book]");
+        //     Console.WriteLine("  volume@ [enter volume]");
+        // }
+
+        // // 
+        // // 
+        // //
+        // void Search()
+        // {
+        //     if (continueProgram)
+        //     {
+        //         SearchScriptures search = new SearchScriptures(GetScriptures(), GetInquiry());
+        //     }
+        //     Console.WriteLine();
+        // }
+        // // 
+        // // 
+        // // 
+
+        // string GetInquiry()
+        // {
+        //     Console.Write("> ");
+        //     string input = Console.ReadLine();
+        //     if (input == "exit")
+        //     {
+        //         continueProgram = false;
+        //     }
+        //     return input;
+        // }
 
 
-        ClearTerminal();
-        SetScriptures();
-        GiveIntro();
-        while (continueProgram)
-        {
-            DisplayMenu();
-            Search();
-        }
-        ClearTerminal();
+        // ClearTerminal();
+        // SetScriptures();
+        // GiveIntro();
+        // while (continueProgram)
+        // {
+        //     DisplayMenu();
+        //     Search();
+        // }
+        // ClearTerminal();
     }
 }
