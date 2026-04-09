@@ -12,7 +12,8 @@ public class Volume : Scripture
         foreach (string newBookLine in csvList)
         {
             string bookName = newBookLine.Split(",")[5];
-            if (bookName.Split('"').Length > 1)
+            bool bookNameHasQuotes = bookName.Split('"').Length > 1;
+            if (bookNameHasQuotes)
             {
                 bookName = bookName.Split('"')[1];
             }
@@ -33,7 +34,7 @@ public class Volume : Scripture
     public override string GetSearchResult(string searchingFor)
     {
         string result = "";
-        int amountOfWordsMatched = 0;
+        double amountOfWordsMatched = 0;
         string[] searchingForSplit = searchingFor.Split(" ");
         foreach (string word in searchingForSplit)
         {

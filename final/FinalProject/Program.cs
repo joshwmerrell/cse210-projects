@@ -11,11 +11,19 @@ class Program
         List<Scripture> chapters = new List<Scripture>{};
         List<Scripture> verses = new List<Scripture>{};
 
+        List<string> commands = new List<string>{"volume", "book", "chapter", "verse"};
+        int VOLUME_COMMAND_INDEX = 0;
+        int BOOK_COMMAND_INDEX = 1;
+        int CHAPTER_COMMAND_INDEX = 2;
+        int VERSE_COMMAND_INDEX = 3;
+
         bool continueProgram = true;
 
 
         void SetScriptures()
         {
+            // DEAR ME, FOR SOME REASON, IT IS PLACING MOSES IN D&C. FIX THIS!!!
+            // MAY NEED TO REDO THIS TO MAKE IT MORE SIMPLE.
             string[] lines = System.IO.File.ReadAllLines("lds-scriptures.csv");
             List<string> volumeBooksLines = new List<string>{};
             List<string> bookCsvLines = new List<string>{};
@@ -36,7 +44,11 @@ class Program
                     int bookId = int.Parse(line.Split(",")[1]);
                     int chapterId = int.Parse(line.Split(",")[2]);
                     int verseId = int.Parse(line.Split(",")[3]);
-                    if (volumeNumber != volumeId)
+
+                    // bool newVolume = 
+                    bool lastLine = i == lines.Length - 1;
+                    
+                    if (volumeNumber != volumeId || lastLine)
                     {
                         volumeNumber = volumeId;
                         previousVolumesBookAmount = bookId - 1;
@@ -46,7 +58,7 @@ class Program
                             volumeBooksLines.Clear();
                         }
                     }
-                    if (bookNumber != bookId - previousVolumesBookAmount)
+                    if (bookNumber != bookId - previousVolumesBookAmount || lastLine)
                     {
                         bookNumber = bookId - previousVolumesBookAmount;
                         previousBooksChapterAmount = chapterId - 1;
@@ -57,7 +69,7 @@ class Program
                             bookCsvLines.Clear();
                         }
                     }
-                    if (chapterNumber != chapterId - previousBooksChapterAmount)
+                    if (chapterNumber != chapterId - previousBooksChapterAmount || lastLine)
                     {
                         chapterNumber = chapterId - previousBooksChapterAmount;
                         // previousChaptersVerseAmount = verseId - 1;
@@ -95,50 +107,60 @@ class Program
 
         void Search(string inquiry)
         {
-            string result = "\n\nResult:";
-            List<string> commands = new List<string>{"volume", "book", "chapter", "verse"};
-            string command = GetCommand(inquiry);
-            bool CommandAndSearchingForArePresent = IsACommand(commands, command) && inquiry.Split("@ ").Length > 1;
-            if (CommandAndSearchingForArePresent)
+            if (inquiry.ToLower() != "exit")
             {
-                if (command == commands[0])
+                string result = "\n\nResult:";
+                string command = GetCommand(inquiry);
+                bool CommandAndSearchingForArePresent = IsACommand(commands, command) && inquiry.Split("@ ").Length > 1;
+                if (CommandAndSearchingForArePresent)
                 {
-                    foreach (Scripture volume in volumes)
+                    bool volumeCommand = command == commands[VOLUME_COMMAND_INDEX];
+                    bool bookCommand = command == commands[BOOK_COMMAND_INDEX];
+                    bool chapterCommand = command == commands[CHAPTER_COMMAND_INDEX];
+                    bool verseCommand = command == commands[VERSE_COMMAND_INDEX];
+                    if (volumeCommand)
                     {
-                        result = result + volume.GetSearchResult(GetSearchingFor(inquiry));
+                        foreach (Scripture volume in volumes)
+                        {
+                            result += volume.GetSearchResult(GetSearchingFor(inquiry));
+                        }
+                    }
+                    else if (bookCommand)
+                    {
+                        foreach (Scripture book in books)
+                        {
+                            result += book.GetSearchResult(GetSearchingFor(inquiry));
+                        }
+                    }
+                    else if (chapterCommand)
+                    {
+                        foreach (Scripture chapter in chapters)
+                        {
+                            result += chapter.GetSearchResult(GetSearchingFor(inquiry));
+                        }
+                    }
+                    else if (verseCommand)
+                    {
+                        foreach (Scripture verse in verses)
+                        {
+                            result += verse.GetSearchResult(GetSearchingFor(inquiry));
+                        }
+                    }
+                    if (result == "\n\nResult:")
+                    {
+                        result = "\n\nNo result found.";
                     }
                 }
-                else if (command == commands[1])
+                else
                 {
-                    foreach (Scripture book in books)
-                    {
-                        result = result + book.GetSearchResult(GetSearchingFor(inquiry));
-                    }
+                    result = "\n\nPlease enter a command and inquiry as formatted above.";
                 }
-                else if (command == commands[2])
-                {
-                    foreach (Scripture chapter in chapters)
-                    {
-                        result = result + chapter.GetSearchResult(GetSearchingFor(inquiry));
-                    }
-                }
-                else if (command == commands[3])
-                {
-                    foreach (Scripture verse in verses)
-                    {
-                        result = result + verse.GetSearchResult(GetSearchingFor(inquiry));
-                    }
-                }
-                if (result == "\n\nResult:")
-                {
-                    result = "\n\nNo result found.";
-                }
+                Console.WriteLine($"{result}\n\n");
             }
             else
             {
-                result = "\n\nPlease enter a command and inquiry as formatted above.";
+                continueProgram = false;
             }
-            Console.WriteLine($"{result}\n\n");
         }
 
         string GetInquiry()
@@ -178,10 +200,7 @@ class Program
         while (continueProgram)
         {
             DisplayMenu();
-            if (continueProgram)
-            {
-                Search(GetInquiry());
-            }
+            Search(GetInquiry());
         }
     }
 }
