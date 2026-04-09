@@ -9,22 +9,52 @@ public class Volume : Scripture
 
     protected override void SetScripture(List<string> csvList)
     {
-        // Sets the books names list.
+        foreach (string newBookLine in csvList)
+        {
+            string bookName = newBookLine.Split(",")[5];
+            if (bookName.Split('"').Length > 1)
+            {
+                bookName = bookName.Split('"')[1];
+            }
+            _booksNames.Add(bookName);
+        }
     }
 
     protected override void SetNumber(string csvLine)
     {
-        // Set number.
+        _number = int.Parse(csvLine.Split(",")[0]);
     }
 
     protected override void SetName(string csvLine)
     {
-        // Set name.
+        _name = csvLine.Split(",")[6].Split('"')[1];
     }
 
     public override string GetSearchResult(string searchingFor)
     {
-        // Display search result.
-        return "";
+        string result = "";
+        int amountOfWordsMatched = 0;
+        string[] searchingForSplit = searchingFor.Split(" ");
+        foreach (string word in searchingForSplit)
+        {
+            foreach (string pieceOfName in _name.Split(" "))
+            {
+                if (word.ToLower() == pieceOfName.ToLower())
+                {
+                    amountOfWordsMatched += 1;
+                    break;
+                }
+            }
+        }
+        if (amountOfWordsMatched == searchingForSplit.Length)
+        {
+            result = result + $"{_name}:";
+            foreach (string book in _booksNames)
+            {
+                result = result + $"\n {book}";
+            }
+            result = $"\n\n{result}";
+        }
+        return result;
     }
 }

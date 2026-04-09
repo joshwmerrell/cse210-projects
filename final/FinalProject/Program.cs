@@ -95,13 +95,12 @@ class Program
 
         void Search(string inquiry)
         {
-            string result = "";
+            string result = "\n\nResult:";
             List<string> commands = new List<string>{"volume", "book", "chapter", "verse"};
             string command = GetCommand(inquiry);
             bool CommandAndSearchingForArePresent = IsACommand(commands, command) && inquiry.Split("@ ").Length > 1;
             if (CommandAndSearchingForArePresent)
             {
-                Console.WriteLine("Result:");
                 if (command == commands[0])
                 {
                     foreach (Scripture volume in volumes)
@@ -130,17 +129,16 @@ class Program
                         result = result + verse.GetSearchResult(GetSearchingFor(inquiry));
                     }
                 }
-                if (result == "")
+                if (result == "\n\nResult:")
                 {
-                    result = "No result found.";
+                    result = "\n\nNo result found.";
                 }
             }
             else
             {
-                result = "Please enter a command and inquiry as formatted above.";
+                result = "\n\nPlease enter a command and inquiry as formatted above.";
             }
-            Console.WriteLine(result);
-            Console.WriteLine();
+            Console.WriteLine($"{result}\n\n");
         }
 
         string GetInquiry()
