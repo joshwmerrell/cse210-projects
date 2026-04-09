@@ -2,11 +2,11 @@
 
 class Program
 {
-    _volumes : List<Scripture>
-    _books : List<Scripture>
-    _chapters : List<Scripture>
-    _verses : List<Scripture>
-    _commands : List<string>
+    volumes : List<Scripture>
+    books : List<Scripture>
+    chapters : List<Scripture>
+    verses : List<Scripture>
+    commands : List<string>
     SetScriptures() : void
     DisplayInto() : void
     DisplayMenu() : void
