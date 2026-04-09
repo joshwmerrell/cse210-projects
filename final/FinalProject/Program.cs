@@ -1,4 +1,6 @@
 using System;
+using System.Data;
+using System.Runtime.InteropServices;
 
 class Program
 {
@@ -91,9 +93,84 @@ class Program
             Console.WriteLine("  volume@ [enter volume]");
         }
 
-        void Search()
+        void Search(string inquiry)
         {
-            
+            string result = "";
+            List<string> commands = new List<string>{"volume", "book", "chapter", "verse"};
+            string command = GetCommand(inquiry);
+            bool CommandAndSearchingForArePresent = IsACommand(commands, command) && inquiry.Split("@ ").Length > 1;
+            if (CommandAndSearchingForArePresent)
+            {
+                Console.WriteLine("Result:");
+                if (command == commands[0])
+                {
+                    foreach (Scripture volume in volumes)
+                    {
+                        result = result + volume.GetSearchResult(GetSearchingFor(inquiry));
+                    }
+                }
+                else if (command == commands[1])
+                {
+                    foreach (Scripture book in books)
+                    {
+                        result = result + book.GetSearchResult(GetSearchingFor(inquiry));
+                    }
+                }
+                else if (command == commands[2])
+                {
+                    foreach (Scripture chapter in chapters)
+                    {
+                        result = result + chapter.GetSearchResult(GetSearchingFor(inquiry));
+                    }
+                }
+                else if (command == commands[3])
+                {
+                    foreach (Scripture verse in verses)
+                    {
+                        result = result + verse.GetSearchResult(GetSearchingFor(inquiry));
+                    }
+                }
+                if (result == "")
+                {
+                    result = "No result found.";
+                }
+            }
+            else
+            {
+                result = "Please enter a command and inquiry as formatted above.";
+            }
+            Console.WriteLine(result);
+            Console.WriteLine();
+        }
+
+        string GetInquiry()
+        {
+            Console.Write("Enter an inquiry: ");
+            return Console.ReadLine();
+        }
+
+        bool IsACommand(List<string> commands, string potentialCommand)
+        {
+            bool isACommand = false;
+            foreach (string command in commands)
+            {
+                if (potentialCommand == command)
+                {
+                    isACommand = true;
+                    break;
+                }
+            }
+            return isACommand;
+        }
+
+        string GetCommand(string inquiry)
+        {
+            return inquiry.Split("@ ")[0];
+        }
+
+        string GetSearchingFor(string inquiry)
+        {
+            return inquiry.Split("@ ")[1];
         }
 
 
@@ -105,80 +182,8 @@ class Program
             DisplayMenu();
             if (continueProgram)
             {
-                Search();
+                Search(GetInquiry());
             }
         }
-
-        // bool continueProgram = true;
-        // List<string> scripturesCsvLines;
-
-        // void SetScriptures()
-        // {
-        //     // Will eventually add a loading bar and or number while this loads.
-        //     scripturesCsvLines = new List<string>{};
-        //     string[] csvLines = System.IO.File.ReadAllLines("lds-scriptures.csv");
-        //     int i = 0;
-        //     foreach (string line in csvLines)
-        //     {
-        //         if (i != 0)
-        //         {
-        //             scripturesCsvLines.Add(line);
-        //         }
-        //         i++;
-        //     }
-        // }
-
-        // List<string> GetScriptures()
-        // {
-        //     return scripturesCsvLines;
-        // }
-
-        // void ClearTerminal()
-        // {
-        //     Console.Clear();
-        // }
-
-        // void GiveIntro()
-        // {
-        // }
-
-        
-
-        // // 
-        // // 
-        // //
-        // void Search()
-        // {
-        //     if (continueProgram)
-        //     {
-        //         SearchScriptures search = new SearchScriptures(GetScriptures(), GetInquiry());
-        //     }
-        //     Console.WriteLine();
-        // }
-        // // 
-        // // 
-        // // 
-
-        // string GetInquiry()
-        // {
-        //     Console.Write("> ");
-        //     string input = Console.ReadLine();
-        //     if (input == "exit")
-        //     {
-        //         continueProgram = false;
-        //     }
-        //     return input;
-        // }
-
-
-        // ClearTerminal();
-        // SetScriptures();
-        // GiveIntro();
-        // while (continueProgram)
-        // {
-        //     DisplayMenu();
-        //     Search();
-        // }
-        // ClearTerminal();
     }
 }

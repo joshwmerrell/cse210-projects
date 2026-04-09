@@ -25,5 +25,5 @@ public abstract class Scripture
         return _name;
     }
 
-    protected abstract void DisplaySearchResult();
+    public abstract string GetSearchResult(string searchingFor);
 }

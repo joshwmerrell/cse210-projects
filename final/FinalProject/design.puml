@@ -10,12 +10,11 @@ class Program
     SetScriptures() : void
     DisplayInto() : void
     DisplayMenu() : void
-    Search() : void
-    ' GetInquiry() : string
-    ' CommandAndSearchingForArePresent() : bool
-    ' CommandIsPresent() : bool
-    ' GetCommand(inquiry : string) : string
-    ' GetSearchingFor(inquiry : string) : string
+    Search(string inquiry) : void
+    GetInquiry() : string
+    IsACommand(commands : List<string>, potentialCommand : string) : bool
+    GetCommand(inquiry : string) : string
+    GetSearchingFor(inquiry : string) : string
 }
 
 abstract Scripture
@@ -28,7 +27,7 @@ abstract Scripture
     ~SetScripture(csvList : List<string>) : void
     +GetNumber() : int
     +GetName() : string
-    ~DisplaySearchResult() : void
+    ~GetSearchResult() : void
 }
 
 class Volume
@@ -38,7 +37,7 @@ class Volume
     ~SetNumber(number : int) : void
     ~SetName(name : string) : void
     ~SetScripture(csvList : List<string>) : void
-    ~DisplaySearchResult() : void
+    ~GetSearchResult() : void
 }
 
 class Book
@@ -48,7 +47,7 @@ class Book
     ~SetNumber(number : int) : void
     ~SetName(name : string) : void
     ~SetScripture(csvList : List<string>) : void
-    ~DisplaySearchResult() : void
+    ~GetSearchResult() : void
 }
 
 class Chapter
@@ -58,7 +57,7 @@ class Chapter
     ~SetNumber(number : int) : void
     ~SetName(name : string) : void
     ~SetScripture(csvList : List<string>) : void
-    ~DisplaySearchResult() : void
+    ~GetSearchResult() : void
 }
 
 class Verse
@@ -68,7 +67,7 @@ class Verse
     ~SetNumber(number : int) : void
     ~SetName(name : string) : void
     ~SetScripture(csvList : List<string>) : void
-    ~DisplaySearchResult() : void
+    ~GetSearchResult() : void
 }
 
 @enduml

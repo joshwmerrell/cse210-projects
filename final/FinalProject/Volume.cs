@@ -22,8 +22,9 @@ public class Volume : Scripture
         // Set name.
     }
 
-    protected override void DisplaySearchResult()
+    public override string GetSearchResult(string searchingFor)
     {
         // Display search result.
+        return "";
     }
 }
