@@ -75,12 +75,12 @@ public class Book : Scripture
         }
         if (amountOfWordsMatched == searchingForSplit.Length)
         {
-            result += $"{_name}:";
+            result = $"{_name}:";
             int chapterNumber = 0;
             foreach (int verseAmount in _verseAmountsInChapters)
             {
                 chapterNumber += 1;
-                result += $"\n {chapterNumber}:{verseAmount}";
+                result += $"\n  {chapterNumber}:{verseAmount}";
             }
             result = $"\n\n{result}";
         }

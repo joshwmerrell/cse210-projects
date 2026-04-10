@@ -49,10 +49,10 @@ public class Volume : Scripture
         }
         if (amountOfWordsMatched == searchingForSplit.Length)
         {
-            result = result + $"{_name}:";
+            result = $"{_name}:";
             foreach (string book in _booksNames)
             {
-                result = result + $"\n {book}";
+                result += $"\n {book}";
             }
             result = $"\n\n{result}";
         }
