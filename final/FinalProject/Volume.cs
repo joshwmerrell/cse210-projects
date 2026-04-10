@@ -9,64 +9,64 @@ public class Volume : Scripture
 
     protected override void SetScripture(List<string> csvList)
     {
-        // string previousBookName = "";
+        string previousBookName = "";
         
-        // foreach (string line in csvList)
-        // {
-        //     // Gets book name.
-        //     List<string> reverseLine = new List<string>{};
-        //     foreach (string part in line.Split('"'))
-        //     {
-        //         reverseLine.Insert(0, part);
-        //     }
-        //     string verseName = reverseLine[3];
-        //     List<string> reverseVerseName = new List<string>{};
-        //     foreach (string piece in verseName.Split(" "))
-        //     {
-        //         reverseVerseName.Insert(0, piece);
-        //     }
-        //     reverseVerseName.Remove(reverseVerseName[0]);
-        //     List<string> bookNameSplit = new List<string>{};
-        //     foreach (string piece in reverseVerseName)
-        //     {
-        //         bookNameSplit.Insert(0, piece);
-        //     }
-        //     string bookName = "";
-        //     int index = 0;
-        //     foreach (string piece in bookNameSplit)
-        //     {
-        //         bool lastPiece = index == bookNameSplit.Count - 1;
-        //         if (lastPiece)
-        //         {
-        //             bookName += piece;
-        //         }
-        //         else
-        //         {
-        //             bookName += $"{piece} ";
-        //         }
-        //         index += 1;
-        //     }
-
-        //     // Add new book name.
-        //     if (bookName != previousBookName)
-        //     {
-        //         _booksNames.Add(bookName);
-        //     }
-
-        //     // Assign a new previous book name.
-        //     previousBookName = bookName;
-        // }
-
-        foreach (string newBookLine in csvList)
+        foreach (string line in csvList)
         {
-            string bookName = newBookLine.Split(",")[5];
-            bool bookNameHasQuotes = bookName.Split('"').Length > 1;
-            if (bookNameHasQuotes)
+            // Gets book name.
+            List<string> reverseLine = new List<string>{};
+            foreach (string part in line.Split('"'))
             {
-                bookName = bookName.Split('"')[1];
+                reverseLine.Insert(0, part);
             }
-            _booksNames.Add(bookName);
+            string verseName = reverseLine[3];
+            List<string> reverseVerseName = new List<string>{};
+            foreach (string piece in verseName.Split(" "))
+            {
+                reverseVerseName.Insert(0, piece);
+            }
+            reverseVerseName.Remove(reverseVerseName[0]);
+            List<string> bookNameSplit = new List<string>{};
+            foreach (string piece in reverseVerseName)
+            {
+                bookNameSplit.Insert(0, piece);
+            }
+            string bookName = "";
+            int index = 0;
+            foreach (string piece in bookNameSplit)
+            {
+                bool lastPiece = index == bookNameSplit.Count - 1;
+                if (lastPiece)
+                {
+                    bookName += piece;
+                }
+                else
+                {
+                    bookName += $"{piece} ";
+                }
+                index += 1;
+            }
+
+            // Add new book name.
+            if (bookName != previousBookName)
+            {
+                _booksNames.Add(bookName);
+            }
+
+            // Assign a new previous book name.
+            previousBookName = bookName;
         }
+
+        // foreach (string newBookLine in csvList)
+        // {
+        //     string bookName = newBookLine.Split(",")[5];
+        //     bool bookNameHasQuotes = bookName.Split('"').Length > 1;
+        //     if (bookNameHasQuotes)
+        //     {
+        //         bookName = bookName.Split('"')[1];
+        //     }
+        //     _booksNames.Add(bookName);
+        // }
     }
 
     protected override void SetNumber(string csvLine)

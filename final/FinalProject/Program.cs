@@ -22,121 +22,124 @@ class Program
 
         void SetScriptures()
         {
-            // string[] lines = System.IO.File.ReadAllLines("lds-scriptures.csv");
-            // List<string> volumeCsvLines = new List<string>{};
-            // List<string> bookCsvLines = new List<string>{};
-            // List<string> chapterCsvLines = new List<string>{};
-            // int VOLUME_ID_INDEX = 0;
-            // int BOOK_ID_INDEX = 1;
-            // int CHAPTER_ID_INDEX = 2;
-            // int volumeNumber = 0;
-            // int bookNumber = 0;
-            // int chapterNumber = 0;
-            // int i = 0;
-            // foreach (string line in lines)
-            // {
-            //     if (i != 0)
-            //     {
-            //         int volumeId = int.Parse(line.Split(",")[VOLUME_ID_INDEX]);
-            //         int bookId = int.Parse(line.Split(",")[BOOK_ID_INDEX]);
-            //         int chapterId = int.Parse(line.Split(",")[CHAPTER_ID_INDEX]);
-            //         if (i == 1)
-            //         {
-            //             volumeNumber += 1;
-            //             bookNumber += 1;
-            //             chapterNumber += 1;
-            //         }
-            //         bool newVolume = volumeNumber != volumeId;
-            //         bool newBook = bookNumber != bookId;
-            //         bool newChapter = chapterNumber != chapterId;
-            //         bool lastLine = i == lines.Length - 1;
-            //         if (newVolume || lastLine)
-            //         {
-            //             volumes.Add(new Volume(volumeCsvLines));
-            //             volumeCsvLines.Clear();
-            //         }
-            //         if (newBook || lastLine)
-            //         {
-            //             books.Add(new Book(bookCsvLines));
-            //             bookCsvLines.Clear();
-            //         }
-            //         if (newChapter || lastLine)
-            //         {
-            //             chapters.Add(new Chapter(chapterCsvLines));
-            //             chapterCsvLines.Clear();
-            //         }
-            //         verses.Add(new Verse(new List<string>{line}));
-            //         volumeCsvLines.Add(line);
-            //         bookCsvLines.Add(line);
-            //         chapterCsvLines.Add(line); 
-            //     }
-            //     i += 1;
-            // }
-
-            // DEAR ME, FOR SOME REASON, IT IS PLACING MOSES IN D&C. FIX THIS!!!
-            // MAY NEED TO REDO THIS TO MAKE IT MORE SIMPLE.
             string[] lines = System.IO.File.ReadAllLines("lds-scriptures.csv");
-            List<string> volumeBooksLines = new List<string>{};
+            List<string> volumeCsvLines = new List<string>{};
             List<string> bookCsvLines = new List<string>{};
             List<string> chapterCsvLines = new List<string>{};
-            int i = 0;
+            int VOLUME_ID_INDEX = 0;
+            int BOOK_ID_INDEX = 1;
+            int CHAPTER_ID_INDEX = 2;
             int volumeNumber = 0;
             int bookNumber = 0;
             int chapterNumber = 0;
-            // // int verseNumber = 0;
-            int previousVolumesBookAmount = 0;
-            int previousBooksChapterAmount = 0;
-            // int previousChaptersVerseAmount = 0;
+            int i = 0;
             foreach (string line in lines)
             {
                 if (i != 0)
                 {
-                    int volumeId = int.Parse(line.Split(",")[0]);
-                    int bookId = int.Parse(line.Split(",")[1]);
-                    int chapterId = int.Parse(line.Split(",")[2]);
-                    int verseId = int.Parse(line.Split(",")[3]);
-
-                    // bool newVolume = 
+                    int volumeId = int.Parse(line.Split(",")[VOLUME_ID_INDEX]);
+                    int bookId = int.Parse(line.Split(",")[BOOK_ID_INDEX]);
+                    int chapterId = int.Parse(line.Split(",")[CHAPTER_ID_INDEX]);
+                    if (i == 1)
+                    {
+                        volumeNumber += 1;
+                        bookNumber += 1;
+                        chapterNumber += 1;
+                    }
+                    bool newVolume = volumeNumber != volumeId;
+                    bool newBook = bookNumber != bookId;
+                    bool newChapter = chapterNumber != chapterId;
                     bool lastLine = i == lines.Length - 1;
-                    
-                    if (volumeNumber != volumeId || lastLine)
+                    if (newVolume || lastLine)
                     {
                         volumeNumber = volumeId;
-                        previousVolumesBookAmount = bookId - 1;
-                        if (i != 1)
-                        {
-                            volumes.Add(new Volume(volumeBooksLines));
-                            volumeBooksLines.Clear();
-                        }
+                        volumes.Add(new Volume(volumeCsvLines));
+                        volumeCsvLines.Clear();
                     }
-                    if (bookNumber != bookId - previousVolumesBookAmount || lastLine)
+                    if (newBook || lastLine)
                     {
-                        bookNumber = bookId - previousVolumesBookAmount;
-                        previousBooksChapterAmount = chapterId - 1;
-                        volumeBooksLines.Add(line);
-                        if (i != 1)
-                        {
-                            books.Add(new Book(bookCsvLines));
-                            bookCsvLines.Clear();
-                        }
+                        bookNumber = bookId;
+                        books.Add(new Book(bookCsvLines));
+                        bookCsvLines.Clear();
                     }
-                    if (chapterNumber != chapterId - previousBooksChapterAmount || lastLine)
+                    if (newChapter || lastLine)
                     {
-                        chapterNumber = chapterId - previousBooksChapterAmount;
-                        // previousChaptersVerseAmount = verseId - 1;
-                        if (i != 1)
-                        {
-                            chapters.Add(new Chapter(chapterCsvLines));
-                            chapterCsvLines.Clear();
-                        }
+                        chapterNumber = chapterId;
+                        chapters.Add(new Chapter(chapterCsvLines));
+                        chapterCsvLines.Clear();
                     }
-                    // int verseNumber = verseId - previousChaptersVerseAmount;
                     verses.Add(new Verse(new List<string>{line}));
+                    volumeCsvLines.Add(line);
                     bookCsvLines.Add(line);
-                    chapterCsvLines.Add(line);
+                    chapterCsvLines.Add(line); 
                 }
-                i++;
+                i += 1;
             }
+
+            // // DEAR ME, FOR SOME REASON, IT IS PLACING MOSES IN D&C. FIX THIS!!!
+            // // MAY NEED TO REDO THIS TO MAKE IT MORE SIMPLE.
+            // string[] lines = System.IO.File.ReadAllLines("lds-scriptures.csv");
+            // List<string> volumeBooksLines = new List<string>{};
+            // List<string> bookCsvLines = new List<string>{};
+            // List<string> chapterCsvLines = new List<string>{};
+            // int i = 0;
+            // int volumeNumber = 0;
+            // int bookNumber = 0;
+            // int chapterNumber = 0;
+            // // // int verseNumber = 0;
+            // int previousVolumesBookAmount = 0;
+            // int previousBooksChapterAmount = 0;
+            // // int previousChaptersVerseAmount = 0;
+            // foreach (string line in lines)
+            // {
+            //     if (i != 0)
+            //     {
+            //         int volumeId = int.Parse(line.Split(",")[0]);
+            //         int bookId = int.Parse(line.Split(",")[1]);
+            //         int chapterId = int.Parse(line.Split(",")[2]);
+            //         int verseId = int.Parse(line.Split(",")[3]);
+
+            //         // bool newVolume = 
+            //         bool lastLine = i == lines.Length - 1;
+                    
+            //         if (volumeNumber != volumeId || lastLine)
+            //         {
+            //             volumeNumber = volumeId;
+            //             previousVolumesBookAmount = bookId - 1;
+            //             if (i != 1)
+            //             {
+            //                 volumes.Add(new Volume(volumeBooksLines));
+            //                 volumeBooksLines.Clear();
+            //             }
+            //         }
+            //         if (bookNumber != bookId - previousVolumesBookAmount || lastLine)
+            //         {
+            //             bookNumber = bookId - previousVolumesBookAmount;
+            //             previousBooksChapterAmount = chapterId - 1;
+            //             volumeBooksLines.Add(line);
+            //             if (i != 1)
+            //             {
+            //                 books.Add(new Book(bookCsvLines));
+            //                 bookCsvLines.Clear();
+            //             }
+            //         }
+            //         if (chapterNumber != chapterId - previousBooksChapterAmount || lastLine)
+            //         {
+            //             chapterNumber = chapterId - previousBooksChapterAmount;
+            //             // previousChaptersVerseAmount = verseId - 1;
+            //             if (i != 1)
+            //             {
+            //                 chapters.Add(new Chapter(chapterCsvLines));
+            //                 chapterCsvLines.Clear();
+            //             }
+            //         }
+            //         // int verseNumber = verseId - previousChaptersVerseAmount;
+            //         verses.Add(new Verse(new List<string>{line}));
+            //         bookCsvLines.Add(line);
+            //         chapterCsvLines.Add(line);
+            //     }
+            //     i++;
+            // }
         }
 
         void DisplayIntro()
