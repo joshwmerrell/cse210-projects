@@ -37,6 +37,10 @@ public class Chapter : Scripture
         {
             chapterColonVerse = verseNameSplitBySpace[2];
         }
+        if (verseNameSplitBySpace.Length > 3)
+        {
+            chapterColonVerse = verseNameSplitBySpace[3];
+        }
         int chapterNumber = int.Parse(chapterColonVerse.Split(":")[0]);
         _number = chapterNumber;
     }

@@ -22,6 +22,57 @@ class Program
 
         void SetScriptures()
         {
+            // string[] lines = System.IO.File.ReadAllLines("lds-scriptures.csv");
+            // List<string> volumeCsvLines = new List<string>{};
+            // List<string> bookCsvLines = new List<string>{};
+            // List<string> chapterCsvLines = new List<string>{};
+            // int VOLUME_ID_INDEX = 0;
+            // int BOOK_ID_INDEX = 1;
+            // int CHAPTER_ID_INDEX = 2;
+            // int volumeNumber = 0;
+            // int bookNumber = 0;
+            // int chapterNumber = 0;
+            // int i = 0;
+            // foreach (string line in lines)
+            // {
+            //     if (i != 0)
+            //     {
+            //         int volumeId = int.Parse(line.Split(",")[VOLUME_ID_INDEX]);
+            //         int bookId = int.Parse(line.Split(",")[BOOK_ID_INDEX]);
+            //         int chapterId = int.Parse(line.Split(",")[CHAPTER_ID_INDEX]);
+            //         if (i == 1)
+            //         {
+            //             volumeNumber += 1;
+            //             bookNumber += 1;
+            //             chapterNumber += 1;
+            //         }
+            //         bool newVolume = volumeNumber != volumeId;
+            //         bool newBook = bookNumber != bookId;
+            //         bool newChapter = chapterNumber != chapterId;
+            //         bool lastLine = i == lines.Length - 1;
+            //         if (newVolume || lastLine)
+            //         {
+            //             volumes.Add(new Volume(volumeCsvLines));
+            //             volumeCsvLines.Clear();
+            //         }
+            //         if (newBook || lastLine)
+            //         {
+            //             books.Add(new Book(bookCsvLines));
+            //             bookCsvLines.Clear();
+            //         }
+            //         if (newChapter || lastLine)
+            //         {
+            //             chapters.Add(new Chapter(chapterCsvLines));
+            //             chapterCsvLines.Clear();
+            //         }
+            //         verses.Add(new Verse(new List<string>{line}));
+            //         volumeCsvLines.Add(line);
+            //         bookCsvLines.Add(line);
+            //         chapterCsvLines.Add(line); 
+            //     }
+            //     i += 1;
+            // }
+
             // DEAR ME, FOR SOME REASON, IT IS PLACING MOSES IN D&C. FIX THIS!!!
             // MAY NEED TO REDO THIS TO MAKE IT MORE SIMPLE.
             string[] lines = System.IO.File.ReadAllLines("lds-scriptures.csv");
